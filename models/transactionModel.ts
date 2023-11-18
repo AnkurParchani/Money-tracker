@@ -1,21 +1,24 @@
 import mongoose, { Document } from "mongoose";
+import User from "./userModel";
 
 // Interface for schema
 interface ITransaction extends Document {
   particulars: string;
   amount: string;
-  createdAt: Date;
+  date: Date;
   img: string;
-  type: "withdrawl" | "deposited";
+  type: "withdrawl" | "deposit";
+  user: object;
 }
 
 // Defining the schema
 const transactionSchema = new mongoose.Schema<ITransaction>({
   particulars: String,
   amount: Number,
-  createdAt: { type: Date, default: new Date() },
   img: String,
-  type: { type: String, enum: ["withdrawl", "deposited"] },
+  date: { type: Date, default: new Date() },
+  type: { type: String, enum: ["withdrawl", "deposit"] },
+  user: { type: mongoose.Schema.ObjectId, ref: User },
 });
 
 // Defining the modal
