@@ -8,7 +8,10 @@ type DecodedToken = {
   exp: string;
 };
 
-export const getUser = async (): Promise<User | undefined> => {
+// Getting the user according to the token
+export const getUser = async (
+  withPassword?: string
+): Promise<User | undefined> => {
   try {
     const token = cookies().get("token")?.value;
     if (!token) return undefined;
@@ -21,7 +24,12 @@ export const getUser = async (): Promise<User | undefined> => {
     const { userId } = decode;
     if (!userId) return undefined;
 
-    const user = await User.findById(userId);
+    let user;
+    if (withPassword === "withPassword") {
+      user = await User.findById(userId).select("+password");
+    } else {
+      user = await User.findById(userId);
+    }
     return user;
   } catch (err) {
     console.log(err);

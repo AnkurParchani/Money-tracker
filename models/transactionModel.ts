@@ -17,7 +17,7 @@ const transactionSchema = new mongoose.Schema<ITransaction>({
   amount: Number,
   img: String,
   date: { type: Date, default: new Date() },
-  type: { type: String, enum: ["withdrawl", "deposit"] },
+  type: { type: String, enum: ["withdraw", "deposit"] },
   user: { type: mongoose.Schema.ObjectId, ref: User },
 });
 

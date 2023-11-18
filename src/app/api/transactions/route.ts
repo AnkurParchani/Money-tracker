@@ -11,10 +11,11 @@ import AppError from "../../../../utils/errors/AppError";
 export const GET = async (req: NextRequest) => {
   try {
     connectDB();
-    const searchParams = req.nextUrl.searchParams;
-    const userId = searchParams.get("userId");
+    const user = await getUser();
+    if (!user)
+      return NextResponse.json(new AppError(401, "please login first"));
 
-    const transactions = await Transaction.find().where({ user: userId });
+    const transactions = await Transaction.find().where({ user: user._id });
 
     return NextResponse.json({ status: "success", transactions });
   } catch (err) {
@@ -33,7 +34,7 @@ export const PATCH = catchAsync(async (req: Request) => {
   const newTransaction = await Transaction.findByIdAndUpdate(
     transactionId,
     transaction,
-    { new: true }
+    { new: true, runValidators: true }
   );
 
   return NextResponse.json({ status: "success", newTransaction });
@@ -65,6 +66,12 @@ export const DELETE = catchAsync(async (req: Request) => {
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "please login first"));
 
-  await Transaction.findOneAndDelete(transactionId).where({ user: user._id });
+  const transaction = await Transaction.findOneAndDelete(transactionId).where({
+    user: user._id,
+  });
+
+  if (!transaction)
+    return NextResponse.json(new AppError(404, "No transaction found"));
+
   return NextResponse.json({ status: "success", message: "deleted" });
 });
