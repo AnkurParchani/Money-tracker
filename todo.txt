@@ -1,1 +1,3 @@
 1. Change the delete transaction layout later with transaction Card
+2. showing date functionality
+3. adding a date picker

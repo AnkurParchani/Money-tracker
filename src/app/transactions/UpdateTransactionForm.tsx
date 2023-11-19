@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
 import Button from "../../../components/Button";
+import { updateTransaction } from "../actions/transactionActions";
 
 const UpdateTransactionForm = ({
   setModalType,
@@ -19,7 +20,10 @@ const UpdateTransactionForm = ({
     img,
   } = transaction;
 
-  async function handleSubmit() {}
+  async function handleSubmit(e: FormData) {
+    const data = await updateTransaction(e, TransactionId);
+    console.log(data);
+  }
 
   return (
     <form
@@ -38,6 +42,9 @@ const UpdateTransactionForm = ({
         inputClassname="text-black"
       />
 
+      {/* Do date picker and all tomorrow */}
+      {/* <input type="date" placeholder="dd-mm-yyyy" className="text-black" /> */}
+
       <Input
         type="number"
         id="amount"
@@ -55,7 +62,7 @@ const UpdateTransactionForm = ({
         selectClassname="capitalize text-black"
       />
 
-      <Button className="bg-gray-600 text-center">Add</Button>
+      <Button className="bg-gray-600 text-center">Update</Button>
       <Button
         className="bg-green-600 text-center"
         onClick={() => setModalType("")}

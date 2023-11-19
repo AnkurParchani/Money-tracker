@@ -15,3 +15,9 @@ type User = {
   img?: string;
   _id: string;
 };
+
+type formattedDateType = {
+  day: string;
+  month: string;
+  year: string;
+};
