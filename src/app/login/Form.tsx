@@ -13,30 +13,28 @@ const Form = () => {
   }
 
   return (
-    <>
-      <form
-        autoComplete="off"
-        action={handleSubmit}
-        className="flex flex-col gap-3 max-w-md mx-auto"
-      >
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          label="Enter email"
-          inputClassname="text-black"
-        />
-        <Input
-          type="password"
-          id="password"
-          name="password"
-          label="Enter password"
-          inputClassname="text-black"
-        />
+    <form
+      autoComplete="off"
+      action={handleSubmit}
+      className="flex flex-col gap-3 max-w-md mx-auto"
+    >
+      <Input
+        type="email"
+        id="email"
+        name="email"
+        label="Enter email"
+        inputClassname="text-black"
+      />
+      <Input
+        type="password"
+        id="password"
+        name="password"
+        label="Enter password"
+        inputClassname="text-black"
+      />
 
-        <Button className="bg-gray-600 text-center">Signup</Button>
-      </form>
-    </>
+      <Button className="bg-gray-600 text-center">Signup</Button>
+    </form>
   );
 };
 

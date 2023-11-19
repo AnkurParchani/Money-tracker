@@ -5,6 +5,7 @@ type InputType = {
   name: string;
   labelClassname?: string;
   inputClassname?: string;
+  defaultValue?: string;
 };
 
 const Input = ({
@@ -14,6 +15,7 @@ const Input = ({
   type,
   labelClassname,
   inputClassname,
+  defaultValue,
 }: InputType) => {
   return (
     <div className="flex flex-col gap-3">
@@ -22,11 +24,23 @@ const Input = ({
           <label className={labelClassname} htmlFor={id}>
             {label}
           </label>
-          <input className={inputClassname} type={type} name={name} id={id} />
+          <input
+            defaultValue={defaultValue}
+            className={inputClassname}
+            type={type}
+            name={name}
+            id={id}
+          />
         </>
       ) : (
         <>
-          <input className={inputClassname} type={type} name={name} id={id} />
+          <input
+            defaultValue={defaultValue}
+            className={inputClassname}
+            type={type}
+            name={name}
+            id={id}
+          />
         </>
       )}
     </div>

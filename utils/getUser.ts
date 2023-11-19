@@ -8,7 +8,7 @@ type DecodedToken = {
   exp: string;
 };
 
-// Getting the user according to the token
+// Getting the user according to the token for backend requests
 export const getUser = async (
   withPassword?: string
 ): Promise<User | undefined> => {
