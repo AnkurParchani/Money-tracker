@@ -1,6 +1,6 @@
 "use client";
 
-import { signup } from "../actions/auth";
+import { signup } from "../actions/authActions";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";

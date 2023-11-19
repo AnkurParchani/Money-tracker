@@ -5,7 +5,7 @@ type InputType = {
   name: string;
   labelClassname?: string;
   inputClassname?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
 };
 
 const Input = ({

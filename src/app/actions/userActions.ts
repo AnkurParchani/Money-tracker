@@ -39,6 +39,44 @@ export const updateMe = async (e: FormData) => {
   }
 };
 
+// Request for updating the password
+export const updateMyPassword = async (e: FormData) => {
+  try {
+    const oldPassword = e.get("oldPassword");
+    const newPassword = e.get("newPassword");
+    const confirmPassword = e.get("confirmPassword");
+
+    if (!oldPassword || !newPassword || !confirmPassword)
+      throw new Error("Please provide all the details");
+
+    // Getting the token
+    const token = getToken();
+
+    // Doing the request
+    const res = await fetch(`${process.env.SERVER_URL}/api/update-password`, {
+      method: "PATCH",
+      body: JSON.stringify({ oldPassword, newPassword, confirmPassword }),
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+    });
+
+    if (!res.ok)
+      throw new Error("Something went wrong, please try again later");
+
+    const data = await res.json();
+
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail")
+      throw new Error(data.message);
+
+    return data;
+  } catch (err) {
+    return handleClientSideError(err);
+  }
+};
+
 // Request for deleting the account
 export const deleteMe = async (e: FormData) => {
   try {

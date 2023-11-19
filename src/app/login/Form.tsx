@@ -1,6 +1,6 @@
 "use client";
 
-import { login } from "../actions/auth";
+import { login } from "../actions/authActions";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
@@ -33,7 +33,7 @@ const Form = () => {
         inputClassname="text-black"
       />
 
-      <Button className="bg-gray-600 text-center">Signup</Button>
+      <Button className="bg-gray-600 text-center">Login</Button>
     </form>
   );
 };

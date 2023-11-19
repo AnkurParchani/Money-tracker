@@ -6,7 +6,7 @@ import Input from "../../../components/Input";
 
 import { updateMe } from "../actions/userActions";
 
-const UpdateAccountForm = ({
+const UpdateProfileForm = ({
   setModalType,
   user,
 }: {
@@ -53,4 +53,4 @@ const UpdateAccountForm = ({
   );
 };
 
-export default UpdateAccountForm;
+export default UpdateProfileForm;

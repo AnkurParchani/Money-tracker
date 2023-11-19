@@ -1,0 +1,1 @@
+1. Change the delete transaction layout later with transaction Card
