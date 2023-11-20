@@ -32,14 +32,14 @@ const Form = () => {
         placeholder="Email"
         id="email"
         name="email"
-        authInput
+        defalutNoLabelInput
       />
       <Input
         type="password"
         id="password"
         placeholder="Password"
         name="password"
-        authInput
+        defalutNoLabelInput
       />
 
       <Button authButton>Login</Button>

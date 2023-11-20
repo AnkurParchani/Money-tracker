@@ -7,7 +7,7 @@ type InputType = {
   inputClassname?: string;
   defaultValue?: string | number;
   placeholder?: string;
-  authInput?: boolean;
+  defalutNoLabelInput?: boolean;
 };
 
 const Input = ({
@@ -17,14 +17,14 @@ const Input = ({
   type,
   placeholder,
   labelClassname,
-  authInput,
+  defalutNoLabelInput,
   inputClassname,
   defaultValue,
 }: InputType) => {
   let inputClass;
-  if (authInput)
+  if (defalutNoLabelInput)
     inputClass =
-      "text-black border-2 px-2 py-1 rounded-sm  focus:outline-gray-400";
+      "text-black border-2 px-2 py-1 rounded-sm focus:outline-gray-400";
   else inputClass = inputClassname;
 
   return (

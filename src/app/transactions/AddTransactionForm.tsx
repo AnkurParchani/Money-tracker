@@ -5,6 +5,8 @@ import Button from "../../components/Button";
 import Select from "../../components/Select";
 
 import { addTransaction } from "../actions/transactionActions";
+import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const AddTransactionForm = ({
   setModalType,
@@ -13,48 +15,51 @@ const AddTransactionForm = ({
 }) => {
   async function handleSubmit(e: FormData) {
     const data = await addTransaction(e);
-    console.log(data);
+    notifyBasedOnData(data, "Transaction added");
+
+    if (data.status === "success") {
+      setModalType("");
+    }
   }
 
   return (
-    <form
-      autoComplete="off"
-      action={handleSubmit}
-      className="flex flex-col gap-3 max-w-md mx-auto"
-    >
+    <ModalContainer action={handleSubmit} setModalType={setModalType}>
       {/* Add an image */}
+
+      <ModalHeading>Add a Transaction</ModalHeading>
 
       <Input
         type="text"
         id="description"
         name="description"
-        label="Enter Description"
+        defalutNoLabelInput
+        placeholder="Description"
         inputClassname="text-black"
       />
 
       <Input
+        defalutNoLabelInput
         type="number"
         id="amount"
         name="amount"
-        label="Enter Amount"
+        placeholder="Amount"
         inputClassname="text-black"
       />
 
       <Select
+        label="Type:"
         options={["withdraw", "deposit"]}
         name="transactionType"
-        label="Enter the type of transaction"
-        selectClassname="capitalize text-black"
+        selectClassname="capitalize text-black outline-none flex-grow"
       />
 
-      <Button className="bg-gray-600 text-center">Add</Button>
-      <Button
-        className="bg-green-600 text-center"
-        onClick={() => setModalType("")}
-      >
-        Cancel
-      </Button>
-    </form>
+      <div className="flex gap-2 justify-end mt-3">
+        <Button modalCancelBtn onClick={() => setModalType("")}>
+          Cancel
+        </Button>
+        <Button modalActionBtn>Add</Button>
+      </div>
+    </ModalContainer>
   );
 };
 

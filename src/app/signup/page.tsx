@@ -14,7 +14,7 @@ const page = () => {
         <Form />
       </AuthContainer>
 
-      <p className="text-center mt-5 text-sm  text-gray-800">
+      <p className="text-center mt-3 mb-5 text-sm  text-gray-800">
         Already registered?{" "}
         <Link
           href="/login"

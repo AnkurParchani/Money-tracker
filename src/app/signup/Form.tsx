@@ -39,14 +39,20 @@ const Form = () => {
           />
         </div>
 
-        <Input type="text" id="name" name="name" placeholder="Name" authInput />
+        <Input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Name"
+          defalutNoLabelInput
+        />
 
         <Input
           type="email"
           id="email"
           name="email"
           placeholder="Email"
-          authInput
+          defalutNoLabelInput
         />
 
         <Input
@@ -54,7 +60,7 @@ const Form = () => {
           placeholder="Password"
           id="password"
           name="password"
-          authInput
+          defalutNoLabelInput
         />
 
         <Input
@@ -62,7 +68,7 @@ const Form = () => {
           id="passwordConfirm"
           name="passwordConfirm"
           placeholder="Confirm Password"
-          authInput
+          defalutNoLabelInput
         />
 
         <Button authButton>Signup</Button>

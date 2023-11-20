@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import AddTransactionForm from "./AddTransactionForm";
 
 const AddTransactionBtn = () => {
@@ -8,19 +9,16 @@ const AddTransactionBtn = () => {
 
   return (
     <div>
-      {/* Buttons for all the actions */}
       {modalType.length < 1 && (
-        <>
-          <button
-            className="bg-pink-600 p-3 rounded-md"
-            onClick={() => setModalType("add-transaction")}
-          >
-            Add Transaction
-          </button>
-        </>
+        <button
+          className="bg-[#1d9bf0] hover:bg-[#41acf4] duration-100 z-30 rounded-full p-2.5 absolute right-3 bottom-7 text-white"
+          onClick={() => setModalType("add-transaction")}
+        >
+          <AddRoundedIcon style={{ fontSize: "25px" }} />
+        </button>
       )}
 
-      {/* For Update Account */}
+      {/* For adding transaction */}
       {modalType === "add-transaction" && (
         <AddTransactionForm setModalType={setModalType} />
       )}
