@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 import { deleteMe } from "../actions/userActions";
 

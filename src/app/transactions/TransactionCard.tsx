@@ -1,4 +1,4 @@
-import TransactionActionButtons from "./TransactionActionButtons";
+import TransactionActionButtons from "./TransactionCardButtons";
 
 const TransactionCard = ({ transaction }: { transaction: Transaction }) => {
   const { particulars, amount, type } = transaction;

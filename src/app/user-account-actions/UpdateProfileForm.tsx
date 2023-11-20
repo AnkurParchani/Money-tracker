@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 import { updateMe } from "../actions/userActions";
 

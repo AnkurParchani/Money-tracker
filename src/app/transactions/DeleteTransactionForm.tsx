@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import Button from "../../../components/Button";
+import Button from "../../components/Button";
 import { deleteTransaction } from "../actions/transactionActions";
 
 const DeleteTransactionForm = ({

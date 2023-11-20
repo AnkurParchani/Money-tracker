@@ -5,11 +5,12 @@ import AddTransactionBtn from "./transactions/AddTransactionBtn";
 import getTransactions from "../../utils/getTransactions";
 import TransactionCard from "./transactions/TransactionCard";
 import getUser from "../../utils/getUser";
+import ReturnToLogin from "../components/ReturnToLogin";
 
 export default async function Home() {
   const user = await getUser();
   const transactions: Transaction[] = await getTransactions();
-  if (!user || !transactions) return <p>Login first</p>;
+  if (!user || !transactions) return <ReturnToLogin />;
 
   // Filtering the user data
   const filterUser = { name: user.name, email: user.email, img: user.img };

@@ -6,6 +6,8 @@ type InputType = {
   labelClassname?: string;
   inputClassname?: string;
   defaultValue?: string | number;
+  placeholder?: string;
+  authInput?: boolean;
 };
 
 const Input = ({
@@ -13,10 +15,18 @@ const Input = ({
   id,
   name,
   type,
+  placeholder,
   labelClassname,
+  authInput,
   inputClassname,
   defaultValue,
 }: InputType) => {
+  let inputClass;
+  if (authInput)
+    inputClass =
+      "text-black border-2 px-2 py-1 rounded-sm  focus:outline-gray-400";
+  else inputClass = inputClassname;
+
   return (
     <div className="flex flex-col gap-3">
       {label ? (
@@ -26,19 +36,21 @@ const Input = ({
           </label>
           <input
             defaultValue={defaultValue}
-            className={inputClassname}
+            className={inputClass}
             type={type}
             name={name}
             id={id}
+            placeholder={placeholder}
           />
         </>
       ) : (
         <>
           <input
             defaultValue={defaultValue}
-            className={inputClassname}
+            className={inputClass}
             type={type}
             name={name}
+            placeholder={placeholder}
             id={id}
           />
         </>

@@ -1,39 +1,48 @@
 "use client";
 
-import { login } from "../actions/authActions";
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
+import { useRouter } from "next/navigation";
+
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
+import { login } from "../actions/authActions";
+import { useState } from "react";
+
 const Form = () => {
+  const router = useRouter();
+
   async function handleSubmit(event: FormData) {
     const data = await login(event);
 
-    return notifyBasedOnData(data, "Logged in successfully");
+    notifyBasedOnData(data, "Logged in successfully");
+    if (data.status === "success") {
+      router.push("/");
+    }
   }
 
   return (
     <form
       autoComplete="off"
       action={handleSubmit}
-      className="flex flex-col gap-3 max-w-md mx-auto"
+      className="flex flex-col gap-3 mt-5"
     >
       <Input
         type="email"
+        placeholder="Email"
         id="email"
         name="email"
-        label="Enter email"
-        inputClassname="text-black"
+        authInput
       />
       <Input
         type="password"
         id="password"
+        placeholder="Password"
         name="password"
-        label="Enter password"
-        inputClassname="text-black"
+        authInput
       />
 
-      <Button className="bg-gray-600 text-center">Login</Button>
+      <Button authButton>Login</Button>
     </form>
   );
 };

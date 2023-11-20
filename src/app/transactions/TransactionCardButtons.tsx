@@ -4,7 +4,7 @@ import { useState } from "react";
 import DeleteTransactionForm from "./DeleteTransactionForm";
 import UpdateTransactionForm from "./UpdateTransactionForm";
 
-const TransactionActionButtons = ({
+const TransactionCardButtons = ({
   transaction,
 }: {
   transaction: Transaction;
@@ -51,4 +51,4 @@ const TransactionActionButtons = ({
   );
 };
 
-export default TransactionActionButtons;
+export default TransactionCardButtons;

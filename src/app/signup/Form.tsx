@@ -1,15 +1,23 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+
 import { signup } from "../actions/authActions";
-import Input from "../../../components/Input";
-import Button from "../../../components/Button";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const Form = () => {
+  const router = useRouter();
+
   async function handleSubmit(event: FormData) {
     const data = await signup(event);
 
-    return notifyBasedOnData(data, "Successfully registered");
+    notifyBasedOnData(data, "Successfully registered");
+    if (data.status === "success") {
+      router.push("/");
+    }
   }
 
   return (
@@ -17,41 +25,47 @@ const Form = () => {
       <form
         autoComplete="off"
         action={handleSubmit}
-        className="flex flex-col gap-3 max-w-md mx-auto"
+        className="flex flex-col gap-3 mt-5"
       >
-        <Input
-          type="text"
-          id="name"
-          name="name"
-          label="Enter name"
-          inputClassname="text-black"
-        />
+        <div className="text-center mb-5 cursor-pointer">
+          <AddAPhotoIcon
+            style={{
+              color: "#fff",
+              fontSize: "60px",
+              backgroundColor: "#94a3b8",
+              borderRadius: "9999px",
+              padding: "12px",
+            }}
+          />
+        </div>
+
+        <Input type="text" id="name" name="name" placeholder="Name" authInput />
 
         <Input
           type="email"
           id="email"
           name="email"
-          label="Enter email"
-          inputClassname="text-black"
+          placeholder="Email"
+          authInput
         />
 
         <Input
           type="password"
+          placeholder="Password"
           id="password"
           name="password"
-          label="Enter password"
-          inputClassname="text-black"
+          authInput
         />
 
         <Input
           type="password"
           id="passwordConfirm"
           name="passwordConfirm"
-          label="Enter password"
-          inputClassname="text-black"
+          placeholder="Confirm Password"
+          authInput
         />
 
-        <Button className="bg-gray-600 text-center">Signup</Button>
+        <Button authButton>Signup</Button>
       </form>
     </>
   );

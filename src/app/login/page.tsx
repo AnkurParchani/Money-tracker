@@ -1,11 +1,28 @@
+import Link from "next/link";
+import AuthContainer, {
+  AuthHeading,
+  AuthSubHeading,
+} from "../../components/AuthTemplate";
 import Form from "./Form";
 
 const page = () => {
   return (
-    <div>
-      Login
-      <Form />
-    </div>
+    <>
+      <AuthContainer>
+        <AuthHeading>Sign in</AuthHeading>
+        <AuthSubHeading>Welcome back!</AuthSubHeading>
+        <Form />
+      </AuthContainer>
+      <p className="text-center mt-5 text-sm  text-gray-800">
+        New to app?{" "}
+        <Link
+          href="/signup"
+          className="font-semibold text-blue-700 hover:underline"
+        >
+          Join now
+        </Link>
+      </p>
+    </>
   );
 };
 

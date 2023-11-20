@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import Input from "../../../components/Input";
-import Select from "../../../components/Select";
-import Button from "../../../components/Button";
+import Input from "../../components/Input";
+import Select from "../../components/Select";
+import Button from "../../components/Button";
 import { updateTransaction } from "../actions/transactionActions";
 
 const UpdateTransactionForm = ({

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
-import Input from "../../../components/Input";
-import Button from "../../../components/Button";
-import Select from "../../../components/Select";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import Select from "../../components/Select";
 
 import { addTransaction } from "../actions/transactionActions";
 

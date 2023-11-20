@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
-import Input from "../../../components/Input";
+import Input from "../../components/Input";
 import Image from "next/image";
-import Button from "../../../components/Button";
+import Button from "../../components/Button";
 import { updateMyPassword } from "../actions/userActions";
 
 const UpdatePasswordForm = ({
