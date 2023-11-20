@@ -4,6 +4,8 @@ import Input from "../../components/Input";
 import Image from "next/image";
 import Button from "../../components/Button";
 import { updateMyPassword } from "../actions/userActions";
+import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const UpdatePasswordForm = ({
   setModalType,
@@ -12,47 +14,60 @@ const UpdatePasswordForm = ({
 }) => {
   async function handleSubmit(event: FormData) {
     const data = await updateMyPassword(event);
-    console.log(data);
+
+    notifyBasedOnData(data, "Profile Updated");
+    if (data.status === "success") {
+      setModalType("");
+    }
   }
 
   return (
-    <form
-      autoComplete="off"
-      action={handleSubmit}
-      className="flex flex-col gap-3 max-w-md mx-auto"
-    >
-      <Image src="/.jpeg" alt="for later" height={100} width={100} />
+    <ModalContainer action={handleSubmit} setModalType={setModalType}>
+      <ModalHeading underlineColor="border-blue-400">
+        Update your Password:-
+      </ModalHeading>
 
       <Input
         type="password"
         id="oldPassword"
         name="oldPassword"
-        label="Enter old Password"
-        inputClassname="text-black"
+        defalutNoLabelInput
+        placeholder="Old Password"
       />
 
       <Input
         type="password"
         id="newPassword"
         name="newPassword"
-        label="Enter new Password"
-        inputClassname="text-black"
+        defalutNoLabelInput
+        placeholder="New Password"
       />
 
       <Input
         type="password"
         id="confirmPassword"
         name="confirmPassword"
-        label="Confirm your Password"
-        inputClassname="text-black"
+        defalutNoLabelInput
+        placeholder="Confirm  new Password"
       />
 
-      <Button className="bg-gray-600 text-center">Update Password</Button>
-
-      <Button className="bg-green-500" onClick={() => setModalType("")}>
-        Cancel
-      </Button>
-    </form>
+      <div className="flex gap-2 justify-end mt-3">
+        <Button
+          cancelBtnBorderColor="border-blue-500"
+          modalCancelBtn
+          onClick={() => setModalType("")}
+        >
+          Cancel
+        </Button>
+        <Button
+          submitBtnBgColor="border-blue-500 bg-blue-500"
+          submit
+          modalActionBtn
+        >
+          Update
+        </Button>
+      </div>
+    </ModalContainer>
   );
 };
 

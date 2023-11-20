@@ -8,7 +8,7 @@ const Greeting = ({ name }: { name: string }) => {
   else greet = "Good Evening";
 
   return (
-    <div className="text-base text-gray-800">
+    <div className="text-base text-gray-800 font-medium">
       {greet}, <span className="font-medium text-blue-600">{firstName}</span>
     </div>
   );

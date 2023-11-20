@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import handleClientSideError from "../../../utils/errors/handleClientSideError";
 import { getToken } from "../../../utils/getToken";
 
@@ -32,6 +33,8 @@ export const updateMe = async (e: FormData) => {
     // If any error found (operational)
     if (data.isOperational || data.status === "fail")
       throw new Error(data.message);
+
+    revalidateTag("transactions");
 
     return data;
   } catch (err) {

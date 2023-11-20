@@ -3,6 +3,8 @@ import Input from "../../components/Input";
 import Select from "../../components/Select";
 import Button from "../../components/Button";
 import { updateTransaction } from "../actions/transactionActions";
+import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const UpdateTransactionForm = ({
   setModalType,
@@ -22,54 +24,64 @@ const UpdateTransactionForm = ({
 
   async function handleSubmit(e: FormData) {
     const data = await updateTransaction(e, TransactionId);
-    console.log(data);
+
+    notifyBasedOnData(data, "Profile Updated");
+    if (data.status === "success") {
+      setModalType("");
+    }
   }
 
   return (
-    <form
-      autoComplete="off"
-      action={handleSubmit}
-      className="flex flex-col gap-3 max-w-md mx-auto"
-    >
-      {/* Add an image (if it has) */}
+    <ModalContainer action={handleSubmit} setModalType={setModalType}>
+      {/* Add an image */}
+
+      <ModalHeading underlineColor="border-blue-400">
+        Update Profile:-
+      </ModalHeading>
 
       <Input
         type="text"
         id="description"
         name="description"
         defaultValue={particulars}
-        label="Enter Description"
-        inputClassname="text-black"
+        defalutNoLabelInput
+        placeholder="Enter Description"
       />
 
-      {/* Do date picker and all tomorrow */}
-      {/* <input type="date" placeholder="dd-mm-yyyy" className="text-black" /> */}
-
       <Input
-        type="number"
-        id="amount"
+        defalutNoLabelInput
+        type="text"
         defaultValue={amount}
+        id="amount"
         name="amount"
-        label="Enter Amount"
-        inputClassname="text-black"
+        placeholder="Enter Amount"
       />
 
       <Select
         options={["withdraw", "deposit"]}
         name="transactionType"
         defaultValue={type}
-        label="Enter the type of transaction"
-        selectClassname="capitalize text-black"
+        label="Type: "
+        selectClassname="capitalize text-black flex-grow ouline-none focus:outline-none"
       />
 
-      <Button className="bg-gray-600 text-center">Update</Button>
-      <Button
-        className="bg-green-600 text-center"
-        onClick={() => setModalType("")}
-      >
-        Cancel
-      </Button>
-    </form>
+      <div className="flex gap-2 justify-end mt-3">
+        <Button
+          cancelBtnBorderColor="border-blue-500"
+          modalCancelBtn
+          onClick={() => setModalType("")}
+        >
+          Cancel
+        </Button>
+        <Button
+          submitBtnBgColor="border-blue-500 bg-blue-500"
+          submit
+          modalActionBtn
+        >
+          Update
+        </Button>
+      </div>
+    </ModalContainer>
   );
 };
 

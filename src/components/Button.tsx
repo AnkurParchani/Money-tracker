@@ -7,32 +7,42 @@ type ButtonType = {
   authButton?: boolean;
   modalActionBtn?: boolean;
   modalCancelBtn?: boolean;
+  submit?: boolean;
+  cancelBtnBorderColor?: string;
+  submitBtnBgColor?: string;
 };
 
-const Button = ({
-  children,
-  className,
-  onClick,
-  authButton,
-  modalActionBtn,
-  modalCancelBtn,
-}: ButtonType) => {
+const Button = (props: ButtonType) => {
+  const {
+    children,
+    className,
+    onClick,
+    authButton,
+    modalActionBtn,
+    submit,
+    modalCancelBtn,
+    cancelBtnBorderColor,
+    submitBtnBgColor,
+  } = props;
+
   let btnClass;
   if (authButton) {
     btnClass =
       "py-3 hover:bg-blue-900 duration-200 rounded-full bg-[#0a66c2] mt-2 text-white font-semibold tracking-wide focus:outline-gray-500";
   } else if (modalActionBtn) {
-    btnClass =
-      "px-4 text-sm py-0.5 border-2 border-blue-500 bg-blue-500 rounded-md text-white";
+    btnClass = `px-4 text-sm py-0.5 border-2 ${submitBtnBgColor} rounded-md text-white`;
   } else if (modalCancelBtn) {
-    btnClass =
-      "px-4 text-sm py-0.5 text-gray-800 border-2 border-blue-400 rounded-md";
+    btnClass = `px-4 text-sm py-0.5 text-gray-800 border-2 ${cancelBtnBorderColor} rounded-md`;
   } else {
     btnClass = className;
   }
 
   return (
-    <button onClick={onClick} className={btnClass}>
+    <button
+      type={submit ? "submit" : "button"}
+      onClick={onClick}
+      className={btnClass}
+    >
       {children}
     </button>
   );

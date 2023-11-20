@@ -1,10 +1,11 @@
-import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
 import { updateMe } from "../actions/userActions";
+import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const UpdateProfileForm = ({
   setModalType,
@@ -15,41 +16,56 @@ const UpdateProfileForm = ({
 }) => {
   async function handleSubmit(event: FormData) {
     const data = await updateMe(event);
-    console.log(data);
+
+    notifyBasedOnData(data, "Profile Updated");
+    if (data.status === "success") {
+      setModalType("");
+    }
   }
 
   return (
-    <form
-      autoComplete="off"
-      action={handleSubmit}
-      className="flex flex-col gap-3 max-w-md mx-auto"
-    >
-      <Image src="/.jpeg" alt="for later" height={100} width={100} />
+    <ModalContainer action={handleSubmit} setModalType={setModalType}>
+      {/* Add an image */}
+
+      <ModalHeading underlineColor="border-green-400">
+        Update Profile:-
+      </ModalHeading>
 
       <Input
-        type="name"
+        type="text"
         id="name"
         name="name"
-        label="Enter Name"
         defaultValue={user.name}
-        inputClassname="text-black"
+        defalutNoLabelInput
+        placeholder="Name"
       />
 
       <Input
+        defalutNoLabelInput
         type="email"
+        defaultValue={user.email}
         id="email"
         name="email"
-        label="Enter Email"
-        defaultValue={user.email}
-        inputClassname="text-black"
+        placeholder="Email"
       />
 
-      <Button className="bg-gray-600 text-center">Update</Button>
-
-      <Button className="bg-green-500" onClick={() => setModalType("")}>
-        Cancel
-      </Button>
-    </form>
+      <div className="flex gap-2 justify-end mt-3">
+        <Button
+          cancelBtnBorderColor="border-green-500"
+          modalCancelBtn
+          onClick={() => setModalType("")}
+        >
+          Cancel
+        </Button>
+        <Button
+          submitBtnBgColor="border-green-500 bg-green-500"
+          submit
+          modalActionBtn
+        >
+          Update
+        </Button>
+      </div>
+    </ModalContainer>
   );
 };
 

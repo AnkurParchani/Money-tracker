@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 
 import { deleteMe } from "../actions/userActions";
+import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
 
 const DeleteAccountForm = ({
   setModalType,
@@ -16,24 +17,38 @@ const DeleteAccountForm = ({
   }
 
   return (
-    <form
-      autoComplete="off"
-      action={handleSubmit}
-      className="flex flex-col gap-3 max-w-md mx-auto"
-    >
+    <ModalContainer action={handleSubmit} setModalType={setModalType}>
+      <ModalHeading underlineColor="border-red-400">
+        Delete Account?
+      </ModalHeading>
+
+      <h1>You sure you want to delete your Accout?</h1>
+
       <Input
         type="password"
         id="password"
         name="password"
-        label="Enter password"
-        inputClassname="text-black"
+        defalutNoLabelInput
+        placeholder="Enter your Password"
       />
 
-      <Button className="bg-gray-600 text-center">Delete</Button>
-      <Button className="bg-green-500" onClick={() => setModalType("")}>
-        Cancel
-      </Button>
-    </form>
+      <div className="flex gap-2 justify-end mt-3">
+        <Button
+          cancelBtnBorderColor="border-red-500"
+          modalCancelBtn
+          onClick={() => setModalType("")}
+        >
+          Cancel
+        </Button>
+        <Button
+          submit
+          modalActionBtn
+          submitBtnBgColor="border-red-500 bg-red-500"
+        >
+          Delete
+        </Button>
+      </div>
+    </ModalContainer>
   );
 };
 

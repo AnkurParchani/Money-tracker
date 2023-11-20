@@ -11,7 +11,7 @@ const ModalContainer = ({
   action: (formData: FormData) => void;
 }) => {
   return (
-    <>
+    <div className="relative">
       <div
         className="fixed z-40 inset-x-0 inset-y-0 w-full bg-black opacity-80"
         onClick={() => setModalType("")}
@@ -23,14 +23,22 @@ const ModalContainer = ({
       >
         {children}
       </form>
-    </>
+    </div>
   );
 };
 
 // For modal heading
-export const ModalHeading = ({ children }: { children: React.ReactNode }) => {
+export const ModalHeading = ({
+  children,
+  underlineColor,
+}: {
+  children: React.ReactNode;
+  underlineColor?: string;
+}) => {
   return (
-    <h1 className="mb-3 border-b-2 text-gray-700 font-medium border-blue-400 w-fit">
+    <h1
+      className={`mb-3 border-b-2 text-gray-700 font-medium ${underlineColor} w-fit`}
+    >
       {children}
     </h1>
   );
