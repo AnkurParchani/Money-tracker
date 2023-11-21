@@ -1,11 +1,12 @@
 import mongoose, { Document } from "mongoose";
 import User from "./userModel";
+import formatDate from "../utils/formatDate";
 
 // Interface for schema
 interface ITransaction extends Document {
   particulars: string;
   amount: string;
-  date: Date;
+  date: string;
   img: string;
   type: "withdrawl" | "deposit";
   user: object;
@@ -16,9 +17,18 @@ const transactionSchema = new mongoose.Schema<ITransaction>({
   particulars: String,
   amount: Number,
   img: String,
-  date: { type: Date, default: new Date() },
+  date: { type: String },
   type: { type: String, enum: ["withdraw", "deposit"] },
   user: { type: mongoose.Schema.ObjectId, ref: User },
+});
+
+transactionSchema.pre("save", function () {
+  console.log("inside the new updated middleware");
+
+  if (!this.date) {
+    const formattedDate = formatDate(String(new Date()));
+    this.date = `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`;
+  }
 });
 
 // Defining the modal

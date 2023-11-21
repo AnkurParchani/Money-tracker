@@ -71,7 +71,9 @@ const Form = () => {
           defalutNoLabelInput
         />
 
-        <Button authButton>Signup</Button>
+        <Button submit authButton>
+          Signup
+        </Button>
       </form>
     </>
   );

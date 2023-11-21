@@ -11,7 +11,7 @@ const AddTransactionBtn = ({ currentBalance }: { currentBalance: number }) => {
     <div>
       {modalType.length < 1 && (
         <button
-          className="bg-[#1d9bf0] hover:bg-[#41acf4] duration-100 rounded-full p-2.5 absolute right-3 bottom-7 text-white"
+          className="bg-[#1d9bf0] hover:bg-[#41acf4] z-30 duration-100 rounded-full p-2.5 fixed right-3 bottom-7 text-white"
           onClick={() => setModalType("add-transaction")}
         >
           <AddRoundedIcon style={{ fontSize: "25px" }} />

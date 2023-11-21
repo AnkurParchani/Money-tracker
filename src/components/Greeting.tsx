@@ -5,10 +5,10 @@ const Greeting = ({ name }: { name: string }) => {
   let greet;
   if (hour > 0 && hour <= 12) greet = "Good Morning";
   if (hour > 12 && hour <= 16) greet = "Good Afternoon";
-  else greet = "Good Evening";
+  if (hour > 16 && hour <= 24) greet = "Good Evening";
 
   return (
-    <div className="text-base text-gray-800 font-medium">
+    <div className="text-base px-2 text-gray-800 font-medium">
       {greet}, <span className="font-medium text-blue-600">{firstName}</span>
     </div>
   );

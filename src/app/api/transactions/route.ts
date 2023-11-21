@@ -23,6 +23,27 @@ export const GET = async (req: NextRequest) => {
   }
 };
 
+// POST a new Transaction
+export const POST = catchAsync(async (req: Request) => {
+  connectDB();
+  const { particulars, amount, type, date } = await req.json();
+
+  const user = await getUser();
+  if (!user) return NextResponse.json(new AppError(401, "please login first"));
+
+  const transaction = new Transaction({
+    particulars,
+    amount,
+    type,
+    date,
+    user: user._id,
+  });
+
+  await transaction.save();
+
+  return NextResponse.json({ status: "success", transaction });
+});
+
 // UPDATE a new Transaction
 export const PATCH = catchAsync(async (req: Request) => {
   connectDB();
@@ -38,24 +59,6 @@ export const PATCH = catchAsync(async (req: Request) => {
   );
 
   return NextResponse.json({ status: "success", newTransaction });
-});
-
-// POST a new Transaction
-export const POST = catchAsync(async (req: Request) => {
-  connectDB();
-  const { particulars, amount, type } = await req.json();
-
-  const user = await getUser();
-  if (!user) return NextResponse.json(new AppError(401, "please login first"));
-
-  const transaction = await Transaction.create({
-    particulars,
-    amount,
-    type,
-    user: user._id,
-  });
-
-  return NextResponse.json({ status: "success", transaction });
 });
 
 // DELETE a new Transaction

@@ -42,7 +42,9 @@ const Form = () => {
         defalutNoLabelInput
       />
 
-      <Button authButton>Login</Button>
+      <Button submit authButton>
+        Login
+      </Button>
     </form>
   );
 };

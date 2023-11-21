@@ -2,7 +2,7 @@ type Transaction = {
   _id: string;
   particulars: string;
   amount: number;
-  date: string;
+  date?: string;
   type: string;
   user: string;
   img?: string;

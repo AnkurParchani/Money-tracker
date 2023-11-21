@@ -37,7 +37,7 @@ export const ModalHeading = ({
 }) => {
   return (
     <h1
-      className={`mb-3 border-b-2 text-gray-700 font-medium ${underlineColor} w-fit`}
+      className={`mb-3 border-b-2 text-lg text-gray-700 font-medium ${underlineColor} w-fit`}
     >
       {children}
     </h1>
