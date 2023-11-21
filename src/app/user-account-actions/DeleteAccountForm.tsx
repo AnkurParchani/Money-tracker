@@ -22,7 +22,9 @@ const DeleteAccountForm = ({
         Delete Account?
       </ModalHeading>
 
-      <h1>You sure you want to delete your Accout?</h1>
+      <h1 className="text-sm">
+        Think twice. This action can&apos;t be undone!
+      </h1>
 
       <Input
         type="password"

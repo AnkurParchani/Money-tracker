@@ -12,7 +12,7 @@ const DeleteTransactionForm = ({
   setModalType: Dispatch<SetStateAction<string>>;
   transaction: Transaction;
 }) => {
-  const { particulars, amount, type, _id: transactionId } = transaction;
+  const { _id: transactionId, date } = transaction;
 
   async function handleDelete() {
     const data = await deleteTransaction(transactionId);
@@ -30,6 +30,7 @@ const DeleteTransactionForm = ({
         Delete this Transaction?
       </ModalHeading>
 
+      <h1 className="text-right text-xs text-gray-800 font-bold ">{date}</h1>
       <TransactionCard transaction={transaction} />
 
       <div className="flex gap-2 justify-end mt-3">

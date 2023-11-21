@@ -1,17 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/navigation";
+
+import toast from "react-hot-toast";
 import DeleteAccountForm from "./DeleteAccountForm";
 import UpdateProfileForm from "./UpdateProfileForm";
 import UpdatePasswordForm from "./UpdatePasswordForm";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import UserActionBtn from "@/components/UserActionBtn";
+import { signout } from "../actions/authActions";
 
 const UserActionButtons = ({ user }: { user: Partial<User> }) => {
   const [modalType, setModalType] = useState<string>("");
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const router = useRouter();
+
+  // Function to signout
+  function handleSignoutClick() {
+    const data = signout();
+    if (data) {
+      router.push("/login");
+      toast.success("Signed out successfully");
+    } else {
+      toast.success(`Sorry, something went wrong while logging out.`);
+    }
+  }
 
   return (
     <div>
@@ -39,6 +58,16 @@ const UserActionButtons = ({ user }: { user: Partial<User> }) => {
           icon={
             <KeyOutlinedIcon style={{ color: "#2563eb", fontSize: "25px" }} />
           }
+        />
+
+        <UserActionBtn
+          borderColor="border-yellow-400"
+          btnColor="text-yellow-600"
+          btnText="Sign-out"
+          modalType="signout"
+          onClick={handleSignoutClick}
+          setModalType={setModalType}
+          icon={<LogoutIcon style={{ color: "#dcd326", fontSize: "25px" }} />}
         />
 
         <UserActionBtn

@@ -82,3 +82,11 @@ export const login = async (e: FormData) => {
     return handleClientSideError(err);
   }
 };
+
+// To logout
+export const signout = () => {
+  const cookieStore = cookies();
+
+  cookieStore.delete("token");
+  return true;
+};

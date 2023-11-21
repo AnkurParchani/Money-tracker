@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 type UserActionBtnType = {
   borderColor: string;
@@ -7,6 +7,7 @@ type UserActionBtnType = {
   setModalType: Dispatch<SetStateAction<string>>;
   modalType: string;
   icon: React.ReactNode;
+  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
 };
 
 const UserActionBtn = ({
@@ -16,10 +17,12 @@ const UserActionBtn = ({
   setModalType,
   modalType,
   icon,
+  onClick,
 }: UserActionBtnType) => {
   return (
     <div
       className={`bg-gray-100 grid grid-cols-[auto_1fr] shadow-md border-2 ${borderColor} p-3 rounded-md`}
+      onClick={onClick}
     >
       {icon}
       <button className={btnColor} onClick={() => setModalType(modalType)}>
