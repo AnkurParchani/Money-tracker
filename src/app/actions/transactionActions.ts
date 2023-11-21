@@ -3,6 +3,7 @@
 import { revalidateTag } from "next/cache";
 import handleClientSideError from "../../../utils/errors/handleClientSideError";
 import { getToken } from "../../../utils/getToken";
+import formatDate from "../../../utils/formatDate";
 
 // Adding a new Transaction
 export const addTransaction = async (e: FormData) => {
@@ -11,8 +12,11 @@ export const addTransaction = async (e: FormData) => {
     const particulars = e.get("description");
     const amount = e.get("amount");
     const type = e.get("transactionType");
+    const [day, month, year] = (e.get("date") as string).split("/");
 
-    if (!particulars || !amount || !type)
+    const formattedDate = formatDate(`${month}/${day}/${year}`);
+
+    if (!particulars || !amount || !type || !formattedDate)
       throw new Error("please provide all the details");
 
     // Getting the token
@@ -21,7 +25,12 @@ export const addTransaction = async (e: FormData) => {
     // Doing the request
     const res = await fetch(`${process.env.SERVER_URL}/api/transactions`, {
       method: "POST",
-      body: JSON.stringify({ particulars, amount, type }),
+      body: JSON.stringify({
+        particulars,
+        amount,
+        type,
+        date: `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`,
+      }),
       headers: {
         "Content-Type": "application/json",
         Cookie: `token=${token}`,
@@ -52,6 +61,9 @@ export const updateTransaction = async (e: FormData, transactionId: string) => {
     const particulars = e.get("description");
     const amount = e.get("amount");
     const type = e.get("transactionType");
+    const [day, month, year] = (e.get("date") as string).split("/");
+
+    const formattedDate = formatDate(`${month}/${day}/${year}`);
 
     // Getting the token
     const token = getToken();
@@ -59,7 +71,13 @@ export const updateTransaction = async (e: FormData, transactionId: string) => {
     // Doing the request
     const res = await fetch(`${process.env.SERVER_URL}/api/transactions`, {
       method: "PATCH",
-      body: JSON.stringify({ transactionId, particulars, amount, type }),
+      body: JSON.stringify({
+        transactionId,
+        particulars,
+        amount,
+        type,
+        date: `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`,
+      }),
       headers: {
         Cookie: `token=${token}`,
       },

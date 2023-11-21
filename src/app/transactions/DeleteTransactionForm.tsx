@@ -16,6 +16,7 @@ const DeleteTransactionForm = ({
 
   async function handleDelete() {
     const data = await deleteTransaction(transactionId);
+
     notifyBasedOnData(data, "Transaction deleted");
 
     if (data.status === "success") {

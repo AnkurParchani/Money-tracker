@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import { updateTransaction } from "../actions/transactionActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
+import DateSelector from "@/components/DateSelector";
 
 const UpdateTransactionForm = ({
   setModalType,
@@ -56,6 +57,8 @@ const UpdateTransactionForm = ({
         name="amount"
         placeholder="Enter Amount"
       />
+
+      <DateSelector defaultDate={date as string} />
 
       <Select
         options={["withdraw", "deposit"]}

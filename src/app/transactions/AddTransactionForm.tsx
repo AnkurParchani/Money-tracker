@@ -8,6 +8,8 @@ import { addTransaction } from "../actions/transactionActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 import ShowBalance from "./ShowBalance";
+import DateSelector from "@/components/DateSelector";
+import formatDate from "../../../utils/formatDate";
 
 const AddTransactionForm = ({
   setModalType,
@@ -54,6 +56,8 @@ const AddTransactionForm = ({
         name="amount"
         placeholder="Amount"
       />
+
+      <DateSelector />
 
       <Select
         label="Type:"

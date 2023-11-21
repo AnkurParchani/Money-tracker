@@ -15,6 +15,7 @@ const formatDate = (dateToFormat: string): formattedDateType => {
   ];
 
   const date = new Date(dateToFormat);
+  date.setHours(16);
 
   const day = String(date.getUTCDate()).padStart(2, "0");
   const monthNum = date.getUTCMonth();

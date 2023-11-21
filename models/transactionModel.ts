@@ -23,8 +23,6 @@ const transactionSchema = new mongoose.Schema<ITransaction>({
 });
 
 transactionSchema.pre("save", function () {
-  console.log("inside the new updated middleware");
-
   if (!this.date) {
     const formattedDate = formatDate(String(new Date()));
     this.date = `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`;

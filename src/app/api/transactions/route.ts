@@ -69,7 +69,7 @@ export const DELETE = catchAsync(async (req: Request) => {
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "please login first"));
 
-  const transaction = await Transaction.findOneAndDelete(transactionId).where({
+  const transaction = await Transaction.findByIdAndDelete(transactionId).where({
     user: user._id,
   });
 

@@ -7,7 +7,7 @@ import Select from "@/components/Select";
 type GroupedDataType = { date: string | undefined; entries: Transaction[] };
 
 const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
-  const [sortBy, setSortBy] = useState<string>("default");
+  const [sortBy, setSortBy] = useState<string>("recent");
   const [sortedArr, setSortedArr] = useState<GroupedDataType[]>([]);
 
   // Memoizing the whole data
@@ -21,11 +21,18 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
       );
 
       if (existingEntry) {
-        existingEntry.entries.push({ particulars, amount, type, user, _id });
+        existingEntry.entries.push({
+          particulars,
+          amount,
+          type,
+          user,
+          _id,
+          date,
+        });
       } else {
         acc.push({
           date,
-          entries: [{ particulars, amount, type, user, _id }],
+          entries: [{ particulars, amount, type, user, _id, date }],
         });
       }
 
@@ -71,9 +78,9 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
       <Select
         onChange={handleChange}
         noBorder
-        options={["Recent", "Old", "Custom"]}
+        options={["Recent", "Old"]}
         name="transactionType"
-        selectClassname="capitalize absolute right-4 top-0 text-black bg-blue-100 focus:outline-none text-xs outline-none px-1.5 py-1 rounded-md"
+        selectClassname="capitalize absolute right-4 top-0 text-black bg-blue-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md"
       />
 
       {sortedArr.map((transaction: GroupedDataType) => {

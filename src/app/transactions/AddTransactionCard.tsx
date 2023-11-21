@@ -10,7 +10,7 @@ const AddTransactionCard = ({ currentBalance }: { currentBalance: number }) => {
     <>
       <div
         onClick={() => setModalType("add-transaction")}
-        className={`bg-white text-sm grid grid-cols-[1fr_auto_auto] items-center rounded-md px-2 py-1.5 border-l-8 border-r-8 shadow-xl border-gray-600`}
+        className={`bg-white cursor-pointer hover:bg-gray-200 duration-200 text-sm grid grid-cols-[1fr_auto_auto] items-center rounded-md px-2 py-1.5 border-l-8 border-r-8 shadow-xl border-gray-600`}
       >
         <h1 className="text-center text-gray-600">
           <AddIcon style={{ fontSize: "30px" }} />
