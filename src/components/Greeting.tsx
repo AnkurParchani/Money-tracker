@@ -3,7 +3,7 @@ const Greeting = ({ name }: { name: string }) => {
   const hour = new Date().getHours();
 
   let greet;
-  if (hour > 0 && hour <= 12) greet = "Good Morning";
+  if (hour >= 0 && hour <= 12) greet = "Good Morning";
   if (hour > 12 && hour <= 16) greet = "Good Afternoon";
   if (hour > 16 && hour <= 24) greet = "Good Evening";
 

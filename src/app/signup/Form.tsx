@@ -22,7 +22,7 @@ const Form = () => {
 
       notifyBasedOnData(data, "Successfully registered");
       if (data.status === "success") {
-        router.push("/");
+        return router.push("/");
       }
     } catch (err) {
       console.log("Error from signup function", err);
