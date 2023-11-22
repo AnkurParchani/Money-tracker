@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+"use client";
+
+import { Dispatch, SetStateAction, useState } from "react";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import Button from "../../components/Button";
@@ -6,6 +8,7 @@ import { updateTransaction } from "../actions/transactionActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 import DateSelector from "@/components/DateSelector";
+import AddTransactionImg from "./AddTransactionImg";
 
 const UpdateTransactionForm = ({
   setModalType,
@@ -22,11 +25,12 @@ const UpdateTransactionForm = ({
     type,
     img,
   } = transaction;
+  const [transactionImg, setTransactionImg] = useState<string | undefined>(img);
 
   async function handleSubmit(e: FormData) {
-    const data = await updateTransaction(e, TransactionId);
+    const data = await updateTransaction(e, TransactionId, transactionImg);
 
-    notifyBasedOnData(data, "Profile Updated");
+    notifyBasedOnData(data, "Transaction Updated");
     if (data.status === "success") {
       setModalType("");
     }
@@ -34,11 +38,41 @@ const UpdateTransactionForm = ({
 
   return (
     <ModalContainer action={handleSubmit} setModalType={setModalType}>
-      {/* Add an image */}
-
       <ModalHeading underlineColor="border-blue-400">
-        Update Profile:-
+        Update Transaction:-
       </ModalHeading>
+
+      {/* If there is no transaction img then show option to choose */}
+      {!transactionImg && (
+        <AddTransactionImg
+          containerClass="bg-gray-300 py-6 flex justify-center cursor-pointer"
+          setTransactionImg={setTransactionImg}
+          iconStyle={{
+            fontSize: "50px",
+            color: "#5f5e5e",
+          }}
+        />
+      )}
+
+      {/* If there is transaction img then show img and update option */}
+      {transactionImg && (
+        <div className="relative">
+          <AddTransactionImg
+            transactionImg={transactionImg}
+            iconStyle={{
+              backgroundColor: "#0a66c2",
+              borderRadius: "9999px",
+              fontSize: "35px",
+              padding: "7px",
+              position: "absolute",
+              right: "0",
+              color: "white",
+              top: "0",
+            }}
+            setTransactionImg={setTransactionImg}
+          />
+        </div>
+      )}
 
       <Input
         type="text"

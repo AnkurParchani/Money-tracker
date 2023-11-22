@@ -2,11 +2,24 @@
 
 import { revalidateTag } from "next/cache";
 import handleClientSideError from "../../../utils/errors/handleClientSideError";
-import { getToken } from "../../../utils/getToken";
 import formatDate from "../../../utils/formatDate";
+import { getToken } from "../../../utils/getToken";
+
+// Type for details
+type TransactionDetailsType = {
+  particulars?: FormDataEntryValue | null;
+  amount: FormDataEntryValue;
+  type: FormDataEntryValue;
+  date: string;
+  img?: FormDataEntryValue;
+  transactionId?: string;
+};
 
 // Adding a new Transaction
-export const addTransaction = async (e: FormData) => {
+export const addTransaction = async (
+  e: FormData,
+  transactionImg: string | undefined
+) => {
   try {
     // Getting all the details
     const particulars = e.get("description");
@@ -16,21 +29,33 @@ export const addTransaction = async (e: FormData) => {
 
     const formattedDate = formatDate(`${month}/${day}/${year}`);
 
-    if (!particulars || !amount || !type || !formattedDate)
-      throw new Error("please provide all the details");
+    if (
+      !amount ||
+      !type ||
+      !formattedDate ||
+      (type === "withdraw" && !particulars)
+    )
+      throw new Error("Please provide all the details");
 
     // Getting the token
     const token = getToken();
 
+    // Making the data to send
+    const transactionDetails: TransactionDetailsType = {
+      particulars,
+      amount,
+      type,
+      date: `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`,
+    };
+
+    if (transactionImg) {
+      transactionDetails.img = transactionImg;
+    }
+
     // Doing the request
     const res = await fetch(`${process.env.SERVER_URL}/api/transactions`, {
       method: "POST",
-      body: JSON.stringify({
-        particulars,
-        amount,
-        type,
-        date: `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`,
-      }),
+      body: JSON.stringify(transactionDetails),
       headers: {
         "Content-Type": "application/json",
         Cookie: `token=${token}`,
@@ -55,7 +80,11 @@ export const addTransaction = async (e: FormData) => {
 };
 
 // Updating a transaction
-export const updateTransaction = async (e: FormData, transactionId: string) => {
+export const updateTransaction = async (
+  e: FormData,
+  transactionId: string,
+  transactionImg: string | undefined
+) => {
   try {
     // Getting all the details
     const particulars = e.get("description");
@@ -65,19 +94,34 @@ export const updateTransaction = async (e: FormData, transactionId: string) => {
 
     const formattedDate = formatDate(`${month}/${day}/${year}`);
 
+    if (
+      !amount ||
+      !type ||
+      !formattedDate ||
+      (type === "withdraw" && !particulars)
+    )
+      throw new Error("Please provide all the details");
+
+    // Making the data to send
+    const transactionDetails: TransactionDetailsType = {
+      particulars,
+      transactionId,
+      amount,
+      type,
+      date: `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`,
+    };
+
+    if (transactionImg) {
+      transactionDetails.img = transactionImg;
+    }
+
     // Getting the token
     const token = getToken();
 
     // Doing the request
     const res = await fetch(`${process.env.SERVER_URL}/api/transactions`, {
       method: "PATCH",
-      body: JSON.stringify({
-        transactionId,
-        particulars,
-        amount,
-        type,
-        date: `${formattedDate.day}-${formattedDate.month}-${formattedDate.year}`,
-      }),
+      body: JSON.stringify(transactionDetails),
       headers: {
         Cookie: `token=${token}`,
       },

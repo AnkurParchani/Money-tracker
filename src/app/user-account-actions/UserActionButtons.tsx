@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
@@ -18,7 +17,6 @@ import { signout } from "../actions/authActions";
 
 const UserActionButtons = ({ user }: { user: Partial<User> }) => {
   const [modalType, setModalType] = useState<string>("");
-  const [cookies, setCookie, removeCookie] = useCookies();
   const router = useRouter();
 
   // Function to signout

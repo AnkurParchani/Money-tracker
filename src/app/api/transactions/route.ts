@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest) => {
 // POST a new Transaction
 export const POST = catchAsync(async (req: Request) => {
   connectDB();
-  const { particulars, amount, type, date } = await req.json();
+  const { particulars, amount, type, date, img } = await req.json();
 
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "please login first"));
@@ -36,6 +36,7 @@ export const POST = catchAsync(async (req: Request) => {
     amount,
     type,
     date,
+    img,
     user: user._id,
   });
 

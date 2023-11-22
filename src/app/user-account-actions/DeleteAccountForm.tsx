@@ -1,7 +1,11 @@
+"use client";
+
 import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 import { deleteMe } from "../actions/userActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
@@ -11,9 +15,16 @@ const DeleteAccountForm = ({
 }: {
   setModalType: Dispatch<SetStateAction<string>>;
 }) => {
+  const router = useRouter();
+
   async function handleSubmit(event: FormData) {
     const data = await deleteMe(event);
-    console.log(data);
+
+    notifyBasedOnData(data, "ACCOUNT DELETED");
+    if (data.status === "success") {
+      router.push("/login");
+      setModalType("");
+    }
   }
 
   return (

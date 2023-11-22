@@ -3,6 +3,7 @@
 import { revalidateTag } from "next/cache";
 import handleClientSideError from "../../../utils/errors/handleClientSideError";
 import { getToken } from "../../../utils/getToken";
+import { cookies } from "next/headers";
 
 // Request for updating the account
 export const updateMe = async (e: FormData, imgPath?: string) => {
@@ -88,6 +89,8 @@ export const updateMyPassword = async (e: FormData) => {
 // Request for deleting the account
 export const deleteMe = async (e: FormData) => {
   try {
+    const cookieStore = cookies();
+
     // Getting the password
     const password = e.get("password");
     if (!password) throw new Error("Please provide password");
@@ -113,6 +116,8 @@ export const deleteMe = async (e: FormData) => {
     // If any error found (operational)
     if (data.isOperational || data.status === "fail")
       throw new Error(data.message);
+
+    cookieStore.delete("token");
 
     return data;
   } catch (err) {

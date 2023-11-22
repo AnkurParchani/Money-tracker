@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
 import Input from "../../components/Input";
-import Image from "next/image";
 import Button from "../../components/Button";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
+
 import { updateMyPassword } from "../actions/userActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
-import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const UpdatePasswordForm = ({
   setModalType,
@@ -15,7 +15,7 @@ const UpdatePasswordForm = ({
   async function handleSubmit(event: FormData) {
     const data = await updateMyPassword(event);
 
-    notifyBasedOnData(data, "Profile Updated");
+    notifyBasedOnData(data, "Password Updated");
     if (data.status === "success") {
       setModalType("");
     }

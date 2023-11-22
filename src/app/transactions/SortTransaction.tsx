@@ -13,7 +13,7 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
   // Memoizing the whole data
   const groupedTransactionsByDate: GroupedDataType[] = useMemo(() => {
     return transactions.reduce((acc: GroupedDataType[], cur: Transaction) => {
-      const { date, particulars, amount, type, user, _id } = cur;
+      const { date, particulars, amount, type, user, _id, img } = cur;
 
       // Check if there is an existing entry for the current date
       const existingEntry = acc.find(
@@ -28,11 +28,12 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
           user,
           _id,
           date,
+          img,
         });
       } else {
         acc.push({
           date,
-          entries: [{ particulars, amount, type, user, _id, date }],
+          entries: [{ particulars, amount, type, user, _id, date, img }],
         });
       }
 
