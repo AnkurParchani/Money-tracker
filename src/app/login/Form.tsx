@@ -7,7 +7,6 @@ import Input from "../../components/Input";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 import { login } from "../actions/authActions";
-import { useState } from "react";
 
 const Form = () => {
   const router = useRouter();
