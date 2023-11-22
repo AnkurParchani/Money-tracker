@@ -20,9 +20,7 @@ const Form = () => {
     const data = await signup(event, userImg);
 
     notifyBasedOnData(data, "Successfully registered");
-    if (data.status === "success") {
-      router.push("/");
-    }
+    router.push("/");
   }
 
   return (
