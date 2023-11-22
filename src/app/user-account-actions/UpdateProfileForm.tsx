@@ -1,11 +1,13 @@
-import { Dispatch, SetStateAction } from "react";
+"use client";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import notifyBasedOnData from "../../../utils/notifyBasedOnData";
+import AddUserImgFn from "./AddUserImgFn";
 
 import { updateMe } from "../actions/userActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
-import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 const UpdateProfileForm = ({
   setModalType,
@@ -14,8 +16,10 @@ const UpdateProfileForm = ({
   setModalType: Dispatch<SetStateAction<string>>;
   user: Partial<User>;
 }) => {
+  const [userImg, setUserImg] = useState<string | undefined>(user.img);
+
   async function handleSubmit(event: FormData) {
-    const data = await updateMe(event);
+    const data = await updateMe(event, userImg);
 
     notifyBasedOnData(data, "Profile Updated");
     if (data.status === "success") {
@@ -26,6 +30,7 @@ const UpdateProfileForm = ({
   return (
     <ModalContainer action={handleSubmit} setModalType={setModalType}>
       {/* Add an image */}
+      <AddUserImgFn userImg={userImg} setUserImg={setUserImg} />
 
       <ModalHeading underlineColor="border-green-400">
         Update Profile:-

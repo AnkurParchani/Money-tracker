@@ -2,6 +2,7 @@ import Link from "next/link";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import getUser from "../../utils/getUser";
+import Image from "next/image";
 
 const Nav = async () => {
   const user = await getUser();
@@ -15,7 +16,17 @@ const Nav = async () => {
 
       {user && (
         <Link href="/settings" className="absolute right-1.5 top-0.5">
-          <AccountCircleIcon style={{ fontSize: "30px", color: "#1f5ede" }} />
+          {user.img ? (
+            <Image
+              src={user.img}
+              alt="user-img"
+              height={100}
+              width={100}
+              className="rounded-full h-8 w-auto"
+            />
+          ) : (
+            <AccountCircleIcon style={{ fontSize: "30px", color: "#1f5ede" }} />
+          )}
         </Link>
       )}
     </nav>

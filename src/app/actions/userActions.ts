@@ -5,10 +5,15 @@ import handleClientSideError from "../../../utils/errors/handleClientSideError";
 import { getToken } from "../../../utils/getToken";
 
 // Request for updating the account
-export const updateMe = async (e: FormData) => {
+export const updateMe = async (e: FormData, imgPath?: string) => {
   try {
+    let userDetails;
     const name = e.get("name");
     const email = e.get("email");
+
+    // If image is present OR not
+    if (imgPath) userDetails = { email, name, img: imgPath };
+    else userDetails = { email, name };
 
     if (!name || !email) throw new Error("please provide all the details");
 
@@ -18,7 +23,7 @@ export const updateMe = async (e: FormData) => {
     // Doing the request
     const res = await fetch(`${process.env.SERVER_URL}/api/update-me`, {
       method: "PATCH",
-      body: JSON.stringify({ name, email }),
+      body: JSON.stringify(userDetails),
       headers: {
         "Content-Type": "application/json",
         Cookie: `token=${token}`,
