@@ -17,11 +17,16 @@ const Form = () => {
 
   // Submitting the form for signup
   async function handleSubmit(event: FormData) {
-    const data = await signup(event, userImg);
+    try {
+      const data = await signup(event, userImg);
 
-    notifyBasedOnData(data, "Successfully registered");
-    console.log("data after signing in", data);
-    router.push("/");
+      notifyBasedOnData(data, "Successfully registered");
+      if (data.status === "success") {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log("Error from signup function", err);
+    }
   }
 
   return (
