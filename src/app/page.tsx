@@ -33,10 +33,14 @@ export default async function Home() {
             <h1 className="font-semibold text-gray-900 -mb-3">History:-</h1>
           )}
 
-          <SortTransaction transactions={transactions} />
+          {transactions.length > 0 && (
+            <SortTransaction transactions={transactions} />
+          )}
 
           {transactions.length === 0 && (
-            <h1 className="font-semibold text-gray-900">Add a Transaction:-</h1>
+            <h1 className="font-semibold text-gray-900 mt-5">
+              Add a Transaction:-
+            </h1>
           )}
           <AddTransactionCard currentBalance={currentBalance} />
         </div>

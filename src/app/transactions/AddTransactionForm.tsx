@@ -3,13 +3,13 @@ import { Dispatch, SetStateAction } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
-
-import { addTransaction } from "../actions/transactionActions";
-import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
 import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 import ShowBalance from "./ShowBalance";
 import DateSelector from "@/components/DateSelector";
-import formatDate from "../../../utils/formatDate";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+
+import { addTransaction } from "../actions/transactionActions";
+import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
 
 const AddTransactionForm = ({
   setModalType,

@@ -75,13 +75,15 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
 
   return (
     <>
-      <Select
-        onChange={handleChange}
-        noBorder
-        options={["Recent", "Old"]}
-        name="transactionType"
-        selectClassname="capitalize absolute right-4 top-0 text-black bg-blue-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md"
-      />
+      {transactions.length > 1 && (
+        <Select
+          onChange={handleChange}
+          noBorder
+          options={["Recent", "Old"]}
+          name="transactionType"
+          selectClassname="capitalize cursor-pointer absolute right-4 top-0 text-black bg-blue-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md"
+        />
+      )}
 
       {sortedArr.map((transaction: GroupedDataType) => {
         return (

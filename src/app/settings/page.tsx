@@ -11,6 +11,7 @@ const page = async () => {
   return (
     <div className="px-2 py-4 max-w-md mx-auto">
       <h1 className="mb-2 font-semibold text-gray-800 ">Settings:-</h1>
+
       <UserActionButtons user={filterUser} />
     </div>
   );

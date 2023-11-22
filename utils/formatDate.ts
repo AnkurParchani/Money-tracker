@@ -1,4 +1,4 @@
-const formatDate = (dateToFormat: string): formattedDateType => {
+const formatDate = (dateToFormat: string | Date): formattedDateType => {
   const monthName = [
     "Jan",
     "Feb",

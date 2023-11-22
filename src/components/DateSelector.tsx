@@ -6,7 +6,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
-const DateSelector = ({ defaultDate }: { defaultDate: string }) => {
+const DateSelector = ({ defaultDate }: { defaultDate?: string }) => {
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {

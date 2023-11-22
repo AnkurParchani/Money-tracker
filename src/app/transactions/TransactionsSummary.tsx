@@ -14,8 +14,8 @@ const TransactionsSummary = ({
       >
         {/* If the balance is 0 */}
         {currentBalance === 0 && (
-          <h1 className="text-sm text-center font-medium text-gray-800">
-            Your Balance is Empty
+          <h1 className="text-sm text-center font-medium text-pink-500">
+            Add transaction to view Balance
           </h1>
         )}
 

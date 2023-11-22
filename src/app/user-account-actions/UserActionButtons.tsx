@@ -50,24 +50,24 @@ const UserActionButtons = ({ user }: { user: Partial<User> }) => {
         />
 
         <UserActionBtn
-          borderColor="border-blue-400"
-          btnColor="text-blue-600"
+          borderColor="border-yellow-400"
+          btnColor="text-yellow-600"
           btnText="Change Password"
           modalType="update-password"
           setModalType={setModalType}
           icon={
-            <KeyOutlinedIcon style={{ color: "#2563eb", fontSize: "25px" }} />
+            <KeyOutlinedIcon style={{ color: "#dcd326", fontSize: "25px" }} />
           }
         />
 
         <UserActionBtn
-          borderColor="border-yellow-400"
-          btnColor="text-yellow-600"
+          borderColor="border-blue-400"
+          btnColor="text-blue-600"
           btnText="Sign-out"
           modalType="signout"
           onClick={handleSignoutClick}
           setModalType={setModalType}
-          icon={<LogoutIcon style={{ color: "#dcd326", fontSize: "25px" }} />}
+          icon={<LogoutIcon style={{ color: "#2563eb", fontSize: "25px" }} />}
         />
 
         <UserActionBtn

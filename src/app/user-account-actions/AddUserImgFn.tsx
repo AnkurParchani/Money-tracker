@@ -30,11 +30,11 @@ const AddUserImgFn = ({
         {userImg && (
           <div className="relative">
             <Image
-              className="rounded-full"
+              className="rounded-full h-28 w-auto"
               alt="user-image"
               src={userImg}
-              height={100}
-              width={100}
+              height={500}
+              width={500}
             />
 
             <AddUserImg
