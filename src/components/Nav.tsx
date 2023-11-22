@@ -15,14 +15,14 @@ const Nav = async () => {
       </Link>
 
       {user && (
-        <Link href="/settings" className="absolute right-1.5 top-0.5">
+        <Link href="/settings" className="absolute right-1.5 top-1">
           {user.img ? (
             <Image
               src={user.img}
               alt="user-img"
               height={100}
               width={100}
-              className="rounded-full h-8 w-auto"
+              className="rounded-full h-7 w-auto"
             />
           ) : (
             <AccountCircleIcon style={{ fontSize: "30px", color: "#1f5ede" }} />
