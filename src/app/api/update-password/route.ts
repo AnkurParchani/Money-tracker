@@ -9,7 +9,7 @@ import connectDB from "../../../../lib/dbConnect";
 
 // UPDATE the logged in user (only for passwords)
 export const PATCH = catchAsync(async (req: Request) => {
-  connectDB();
+  await connectDB();
   const { oldPassword, newPassword, confirmPassword } = await req.json();
 
   if (newPassword !== confirmPassword)

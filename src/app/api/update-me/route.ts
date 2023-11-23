@@ -7,7 +7,7 @@ import connectDB from "../../../../lib/dbConnect";
 
 // UPDATE the logged in user (not for password)
 export const PATCH = catchAsync(async (req: Request) => {
-  connectDB();
+  await connectDB();
   const { name, email, password, img } = await req.json();
   if (password)
     return NextResponse.json(

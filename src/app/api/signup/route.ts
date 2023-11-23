@@ -8,27 +8,26 @@ import catchAsync from "../../../../utils/errors/catchAsync";
 import connectDB from "../../../../lib/dbConnect";
 
 export const POST = catchAsync(async (req: Request) => {
-  // connectDB();
-  // const { name, email, password, passwordConfirm, img } = await req.json();
-  // // Checking if password and passwordConfirm matches
-  // if (password !== passwordConfirm)
-  //   return NextResponse.json(
-  //     new AppError(400, "Password and Password Confirm do not match")
-  //   );
-  // // Creating the user
-  // const user = await User.create({ name, email, password, img });
-  // // Generating the token and setting the cookie
-  // const token = jwt.sign(
-  //   { userId: user._id },
-  //   process.env.JWT_SECRET as string,
-  //   {
-  //     expiresIn: "10h",
-  //   }
-  // );
-  // cookies().set("token", token);
-  // console.log("Returning the response from signup function");
-  // return NextResponse.json({ status: "success", user, token });
+  await connectDB();
+  const { name, email, password, passwordConfirm, img } = await req.json();
+  // Checking if password and passwordConfirm matches
+  if (password !== passwordConfirm)
+    return NextResponse.json(
+      new AppError(400, "Password and Password Confirm do not match")
+    );
+  // Creating the user
+  const user = await User.create({ name, email, password, img });
 
-  console.log("sending the dummy data");
-  return NextResponse.json({ status: "success", data: "dummy" });
+  // Generating the token and setting the cookie
+  const token = jwt.sign(
+    { userId: user._id },
+    process.env.JWT_SECRET as string,
+    {
+      expiresIn: "10h",
+    }
+  );
+
+  cookies().set("token", token);
+  console.log("Returning the response from signup function");
+  return NextResponse.json({ status: "success", user, token });
 });
