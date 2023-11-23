@@ -6,6 +6,7 @@ import AppError from "../../../../utils/errors/AppError";
 import User from "../../../../models/userModel";
 import catchAsync from "../../../../utils/errors/catchAsync";
 import connectDB from "../../../../lib/dbConnect";
+import mongoose from "mongoose";
 
 export const POST = catchAsync(async (req: Request) => {
   await connectDB();
@@ -17,6 +18,7 @@ export const POST = catchAsync(async (req: Request) => {
     );
   // Creating the user
   const user = await User.create({ name, email, password, img });
+  mongoose.connection.close();
 
   // Generating the token and setting the cookie
   const token = jwt.sign(
