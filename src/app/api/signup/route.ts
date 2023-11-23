@@ -29,5 +29,7 @@ export const POST = catchAsync(async (req: Request) => {
     }
   );
   cookies().set("token", token);
+
+  console.log("Returning the response from signup function");
   return NextResponse.json({ status: "success", user, token });
 });

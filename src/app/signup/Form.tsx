@@ -21,10 +21,10 @@ const Form = () => {
       const data = await signup(event, userImg);
 
       notifyBasedOnData(data, "Successfully registered");
-      console.log(data);
+
+      console.log("data from signup function", data);
       if (data.status === "success") {
-        // return router.push("/");
-        console.log("logged in getout now");
+        return router.push("/");
       }
     } catch (err) {
       console.log("Error from signup function", err);

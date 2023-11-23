@@ -6,6 +6,7 @@ import handleClientSideError from "../../../utils/errors/handleClientSideError";
 // Function for signup
 export const signup = async (e: FormData, imgPath?: string) => {
   try {
+    console.log("Sending the data to route.ts");
     let userDetails;
 
     // Getting details
@@ -42,6 +43,7 @@ export const signup = async (e: FormData, imgPath?: string) => {
     cookies().set("token", data.token);
 
     // Returning back to the preious page
+    console.log("Got the data and resturning it", data);
     return data;
   } catch (err) {
     return handleClientSideError(err);
