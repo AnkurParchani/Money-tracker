@@ -20,15 +20,15 @@ export const POST = catchAsync(async (req: Request) => {
   const user = await User.create({ name, email, password, img });
 
   // Generating the token and setting the cookie
-  const token = jwt.sign(
-    { userId: user._id },
-    process.env.JWT_SECRET as string,
-    {
-      expiresIn: "10h",
-    }
-  );
+  // const token = jwt.sign(
+  //   { userId: user._id },
+  //   process.env.JWT_SECRET as string,
+  //   {
+  //     expiresIn: "10h",
+  //   }
+  // );
 
-  cookies().set("token", token);
+  cookies().set("token", "token");
 
-  return NextResponse.json({ status: "success", user, token });
+  return NextResponse.json({ status: "success", user, token: "token" });
 });
