@@ -2,12 +2,11 @@
 
 import { cookies } from "next/headers";
 import handleClientSideError from "../../../utils/errors/handleClientSideError";
-import connectDB from "../../../lib/dbConnect";
+import mongoose from "mongoose";
 
 // Function for signup
 export const signup = async (e: FormData, imgPath?: string) => {
   try {
-    await connectDB();
     let userDetails;
 
     // Getting details
@@ -45,6 +44,7 @@ export const signup = async (e: FormData, imgPath?: string) => {
 
     // Returning back to the preious page
     console.log("Got the data and resturning it", data);
+    mongoose.connection.close();
     return data;
   } catch (err) {
     return handleClientSideError(err);
