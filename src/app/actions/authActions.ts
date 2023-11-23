@@ -2,11 +2,12 @@
 
 import { cookies } from "next/headers";
 import handleClientSideError from "../../../utils/errors/handleClientSideError";
+import connectDB from "../../../lib/dbConnect";
 
 // Function for signup
 export const signup = async (e: FormData, imgPath?: string) => {
   try {
-    console.log("Sending the data to route.ts");
+    await connectDB();
     let userDetails;
 
     // Getting details
