@@ -9,8 +9,7 @@ import catchAsync from "../../../../utils/errors/catchAsync";
 import AppError from "../../../../utils/errors/AppError";
 
 export const POST = catchAsync(async (req: Request) => {
-  connectDB();
-
+  await connectDB();
   // Getting and checking email and password
   const { email, password } = await req.json();
   if (!email || !password)
