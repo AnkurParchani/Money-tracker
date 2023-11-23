@@ -8,7 +8,7 @@ import catchAsync from "../../../../utils/errors/catchAsync";
 import connectDB from "../../../../lib/dbConnect";
 
 export const POST = catchAsync(async (req: Request) => {
-  // await connectDB();
+  await connectDB();
   const { name, email, password, passwordConfirm, img } = await req.json();
   // Checking if password and passwordConfirm matches
   if (password !== passwordConfirm)
