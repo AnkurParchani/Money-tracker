@@ -24,7 +24,8 @@ const Form = () => {
 
       console.log("data from signup function", data);
       if (data.status === "success") {
-        return router.push("/");
+        // return router.push("/");
+        console.log("success block");
       }
     } catch (err) {
       console.log("Error from signup function", err);
