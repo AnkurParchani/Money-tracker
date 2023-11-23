@@ -11,9 +11,6 @@ export default async function Home() {
   const user = await getUser();
   const transactions: Transaction[] = await getTransactions();
 
-  console.log("logging user", user);
-  console.log("logging transaction", transactions);
-
   if (!user || !transactions) return <ReturnToLogin />;
 
   // Getting the total current balance
