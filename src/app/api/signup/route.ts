@@ -16,21 +16,18 @@ export const POST = catchAsync(async (req: Request) => {
       new AppError(400, "Password and Password Confirm do not match")
     );
   // Creating the user
-  // const user = await User.create({ name, email, password, img });
+  const user = await User.create({ name, email, password, img });
 
   // Generating the token and setting the cookie
-  // const token = jwt.sign(
-  //   { userId: user._id },
-  //   process.env.JWT_SECRET as string,
-  //   {
-  //     expiresIn: "10h",
-  //   }
-  // );
+  const token = jwt.sign(
+    { userId: user._id },
+    process.env.JWT_SECRET as string,
+    {
+      expiresIn: "10h",
+    }
+  );
 
-  cookies().set("token", "token");
+  cookies().set("token", token);
 
-  return NextResponse.json({ status: "success" });
-  // cookies().set("token", token);
-
-  // return NextResponse.json({ status: "success", user, token });
+  return NextResponse.json({ status: "success", user, token });
 });
