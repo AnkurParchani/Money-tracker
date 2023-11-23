@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -6,6 +5,7 @@ import AppError from "../../../../utils/errors/AppError";
 import User from "../../../../models/userModel";
 import catchAsync from "../../../../utils/errors/catchAsync";
 import connectDB from "../../../../lib/dbConnect";
+import { sign } from "../../../../utils/jwt_sign_verify";
 
 export const POST = catchAsync(async (req: Request) => {
   await connectDB();
@@ -20,15 +20,13 @@ export const POST = catchAsync(async (req: Request) => {
   const user = await User.create({ name, email, password, img });
 
   // Generating the token and setting the cookie
-  // const token = jwt.sign(
-  //   { userId: user._id },
-  //   process.env.JWT_SECRET as string,
-  //   {
-  //     expiresIn: "10h",
-  //   }
-  // );
+  // Creating the token using jose
+  const token = await sign(
+    { userId: user._id },
+    process.env.JWT_SECRET as string
+  );
 
-  cookies().set("token", "token");
+  cookies().set("token", token);
 
-  return NextResponse.json({ status: "success", user, token: "token" });
+  return NextResponse.json({ status: "success", user, token });
 });

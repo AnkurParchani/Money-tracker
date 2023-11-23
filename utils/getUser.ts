@@ -1,12 +1,8 @@
 import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
-import User from "../models/userModel";
+import { JWTPayload } from "jose";
+import { verify } from "./jwt_sign_verify";
 
-type DecodedToken = {
-  userId: string;
-  iat: string;
-  exp: string;
-};
+import User from "../models/userModel";
 
 // Getting the user according to the token for backend requests
 export const getUser = async (
@@ -16,12 +12,16 @@ export const getUser = async (
     const token = cookies().get("token")?.value;
     if (!token) return undefined;
 
-    const decode = jwt.verify(
-      token,
+    const decode: JWTPayload = await verify(
+      token as string,
       process.env.JWT_SECRET as string
-    ) as unknown as DecodedToken;
+    );
 
-    const { userId } = decode;
+    const {
+      // @ts-ignore
+      payload: { userId },
+    } = decode;
+
     if (!userId) return undefined;
 
     let user;
