@@ -8,23 +8,23 @@ import AddTransactionCard from "./transactions/AddTransactionCard";
 import SortTransaction from "./transactions/SortTransaction";
 
 export default async function Home() {
-  const user = await getUser();
-  const transactions: Transaction[] = await getTransactions();
+  // const user = await getUser();
+  // const transactions: Transaction[] = await getTransactions();
 
-  if (!user || !transactions) return <ReturnToLogin />;
+  // if (!user || !transactions) return <ReturnToLogin />;
 
   // Getting the total current balance
-  const currentBalance =
-    transactions
-      .filter((transaction) => transaction.type === "deposit")
-      .reduce((cur, acc) => cur + acc.amount, 0) -
-    transactions
-      .filter((transaction) => transaction.type === "withdraw")
-      .reduce((cur, acc) => cur + acc.amount, 0);
+  // const currentBalance =
+  //   transactions
+  //     .filter((transaction) => transaction.type === "deposit")
+  //     .reduce((cur, acc) => cur + acc.amount, 0) -
+  //   transactions
+  //     .filter((transaction) => transaction.type === "withdraw")
+  //     .reduce((cur, acc) => cur + acc.amount, 0);
 
   return (
     <main>
-      <TransactionsSummary currentBalance={currentBalance} />
+      {/* <TransactionsSummary currentBalance={currentBalance} />
       <div className="px-2 py-4 max-w-md mx-auto z-40 mt-5">
         <AddTransactionBtn currentBalance={currentBalance} />
         <Greeting name={user.name} />
@@ -44,8 +44,9 @@ export default async function Home() {
             </h1>
           )}
           <AddTransactionCard currentBalance={currentBalance} />
-        </div>
-      </div>
+        </div> 
+      </div> */}
+      <h1>Main page</h1>
     </main>
   );
 }

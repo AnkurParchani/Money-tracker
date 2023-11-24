@@ -27,7 +27,8 @@ const Form = () => {
       console.log("data from signup function", data);
       if (data.status === "success") {
         setCookie("token", data.user._id);
-        return router.push("/login");
+
+        return router.push("/");
       }
     } catch (err) {
       console.log("Error from signup function", err);
