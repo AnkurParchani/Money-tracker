@@ -8,8 +8,7 @@ import AddTransactionCard from "./transactions/AddTransactionCard";
 import SortTransaction from "./transactions/SortTransaction";
 
 export default async function Home() {
-  const user = await getUser();
-  console.log(user);
+  // const user = await getUser();
   // const transactions: Transaction[] = await getTransactions();
 
   // if (!user || !transactions) return <ReturnToLogin />;
@@ -47,7 +46,7 @@ export default async function Home() {
           <AddTransactionCard currentBalance={currentBalance} />
         </div> 
       </div> */}
-      <h1>Main page</h1>
+      <h1>Main</h1>
     </main>
   );
 }
