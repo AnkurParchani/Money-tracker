@@ -13,31 +13,26 @@ export const getUser = async (
     if (!token) return undefined;
 
     ///////////////////////////////////////////
-    /**
-     
+
     const decode: JWTPayload = await verify(
       token as string,
       process.env.JWT_SECRET as string
-      );
-      
-      const {
+    );
+
+    const {
       // @ts-ignore
       payload: { userId },
     } = decode;
 
     if (!userId) return undefined;
-    
+
     let user;
     if (withPassword === "withPassword") {
       user = await User.findById(userId).select("+password");
     } else {
       user = await User.findById(userId);
     }
-    */
     /////////////////////////////////////////////////
-
-    const user = await User.findById(token);
-    return user;
   } catch (err) {
     console.log(err);
     return undefined;
