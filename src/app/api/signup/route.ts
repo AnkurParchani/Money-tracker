@@ -26,9 +26,7 @@ export const POST = catchAsync(async (req: Request) => {
     process.env.JWT_SECRET as string
   );
 
-  // const token = user._id;
-
-  // cookies().set("token", token);
+  cookies().set("token", token);
 
   return NextResponse.json({ status: "success", user, token });
 });

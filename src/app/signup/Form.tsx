@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 
 import Image from "next/image";
 import Input from "../../components/Input";
@@ -14,24 +13,16 @@ import AddUserImg from "@/components/AddUserImg";
 
 const Form = () => {
   const router = useRouter();
-  const [cookies, setCookie, removeCookie] = useCookies();
   const [userImg, setUserImg] = useState<undefined | string>(undefined);
 
   // Submitting the form for signup
   async function handleSubmit(event: FormData) {
-    try {
-      const data = await signup(event, userImg);
+    const data = await signup(event, userImg);
 
-      notifyBasedOnData(data, "Successfully registered");
+    notifyBasedOnData(data, "Successfully registered");
 
-      console.log("data from signup function", data);
-      if (data.status === "success") {
-        setCookie("token", data.token);
-
-        return router.push("/");
-      }
-    } catch (err) {
-      console.log("Error from signup function", err);
+    if (data.status === "success") {
+      return router.push("/");
     }
   }
 

@@ -13,7 +13,6 @@ const Form = () => {
 
   async function handleSubmit(event: FormData) {
     const data = await login(event);
-    console.log("data after doing the request", data);
 
     notifyBasedOnData(data, "Logged in successfully");
     if (data.status === "success") {

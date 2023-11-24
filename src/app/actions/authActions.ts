@@ -42,7 +42,6 @@ export const signup = async (e: FormData, imgPath?: string) => {
     cookies().set("token", data.token);
 
     // Returning back to the preious page
-    console.log("Got the data and resturning it", data);
     return data;
   } catch (err) {
     return handleClientSideError(err);
@@ -52,14 +51,12 @@ export const signup = async (e: FormData, imgPath?: string) => {
 // Function for Login
 export const login = async (e: FormData) => {
   try {
-    console.log("inside for the login function");
     // Getting details
     const email = e.get("email");
     const password = e.get("password");
 
     if (!email || !password) throw new Error("Please provide all the details");
 
-    console.log("sending the request");
     // Sending the request
     const res = await fetch(`${process.env.SERVER_URL}/api/login`, {
       method: "POST",
