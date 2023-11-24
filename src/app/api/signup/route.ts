@@ -21,10 +21,10 @@ export const POST = catchAsync(async (req: Request) => {
 
   // Generating the token and setting the cookie
   // Creating the token using jose
-  // const token = await sign(
-  //   { userId: user._id },
-  //   process.env.JWT_SECRET as string
-  // );
+  const token = await sign(
+    { userId: user._id },
+    process.env.JWT_SECRET as string
+  );
 
   // const token = user._id;
 
