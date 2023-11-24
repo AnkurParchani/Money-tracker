@@ -52,12 +52,14 @@ export const signup = async (e: FormData, imgPath?: string) => {
 // Function for Login
 export const login = async (e: FormData) => {
   try {
+    console.log("inside for the login function");
     // Getting details
     const email = e.get("email");
     const password = e.get("password");
 
     if (!email || !password) throw new Error("Please provide all the details");
 
+    console.log("sending the request");
     // Sending the request
     const res = await fetch(`${process.env.SERVER_URL}/api/login`, {
       method: "POST",
@@ -69,6 +71,7 @@ export const login = async (e: FormData) => {
     });
 
     const data = await res.json();
+    console.log("data after request", data);
 
     // If any error found (operational)
     if (data.isOperational || data.status === "fail")
