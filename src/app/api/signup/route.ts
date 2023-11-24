@@ -30,5 +30,5 @@ export const POST = catchAsync(async (req: Request) => {
 
   // cookies().set("token", token);
 
-  return NextResponse.json({ status: "success", user });
+  return NextResponse.json({ status: "success", user, token });
 });

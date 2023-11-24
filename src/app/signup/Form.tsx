@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 import Image from "next/image";
 import Input from "../../components/Input";
@@ -13,6 +14,7 @@ import AddUserImg from "@/components/AddUserImg";
 
 const Form = () => {
   const router = useRouter();
+  const [cookies, setCookie, removeCookie] = useCookies();
   const [userImg, setUserImg] = useState<undefined | string>(undefined);
 
   // Submitting the form for signup
@@ -24,8 +26,7 @@ const Form = () => {
 
       console.log("data from signup function", data);
       if (data.status === "success") {
-        // return router.push("/");
-        console.log("success block");
+        return router.push("/login");
       }
     } catch (err) {
       console.log("Error from signup function", err);
