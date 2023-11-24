@@ -10,7 +10,7 @@ import AppError from "../../../../utils/errors/AppError";
 // GET all transaction of a particular user
 export const GET = async (req: NextRequest) => {
   try {
-    await connectDB();
+    connectDB();
     const user = await getUser();
     if (!user)
       return NextResponse.json(new AppError(401, "please login first"));
@@ -25,7 +25,7 @@ export const GET = async (req: NextRequest) => {
 
 // POST a new Transaction
 export const POST = catchAsync(async (req: Request) => {
-  await connectDB();
+  connectDB();
   const { particulars, amount, type, date, img } = await req.json();
 
   const user = await getUser();
@@ -47,7 +47,7 @@ export const POST = catchAsync(async (req: Request) => {
 
 // UPDATE a new Transaction
 export const PATCH = catchAsync(async (req: Request) => {
-  await connectDB();
+  connectDB();
   const { particulars, amount, type, date, img, transactionId } =
     await req.json();
 
@@ -64,7 +64,7 @@ export const PATCH = catchAsync(async (req: Request) => {
 
 // DELETE a new Transaction
 export const DELETE = catchAsync(async (req: Request) => {
-  await connectDB();
+  connectDB();
   const { transactionId } = await req.json();
 
   const user = await getUser();

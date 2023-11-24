@@ -8,7 +8,7 @@ import connectDB from "../../../../lib/dbConnect";
 import { sign } from "../../../../utils/jwt_sign_verify";
 
 export const POST = catchAsync(async (req: Request) => {
-  await connectDB();
+  connectDB();
 
   const { name, email, password, passwordConfirm, img } = await req.json();
   // Checking if password and passwordConfirm matches

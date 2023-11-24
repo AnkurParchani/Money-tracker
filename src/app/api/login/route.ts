@@ -10,7 +10,7 @@ import AppError from "../../../../utils/errors/AppError";
 import { sign } from "../../../../utils/jwt_sign_verify";
 
 export const POST = catchAsync(async (req: Request) => {
-  await connectDB();
+  connectDB();
 
   // Getting and checking email and password
   const { email, password } = await req.json();

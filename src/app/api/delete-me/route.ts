@@ -10,7 +10,7 @@ import connectDB from "../../../../lib/dbConnect";
 
 // Deleting the current logged in user
 export const DELETE = catchAsync(async (req: Request) => {
-  await connectDB();
+  connectDB();
   const { password } = await req.json();
   if (!password)
     return NextResponse.json(new AppError(400, "Please provide the password"));
