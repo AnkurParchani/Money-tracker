@@ -3,6 +3,7 @@ import { JWTPayload } from "jose";
 import { verify } from "./jwt_sign_verify";
 
 import User from "../models/userModel";
+import connectDB from "../lib/dbConnect";
 
 // Getting the user according to the token for backend requests
 export const getUser = async (
@@ -12,6 +13,7 @@ export const getUser = async (
     const token = cookies().get("token")?.value;
     if (!token) return undefined;
 
+    await connectDB();
     ///////////////////////////////////////////
 
     const decode: JWTPayload = await verify(
