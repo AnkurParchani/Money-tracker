@@ -71,7 +71,6 @@ export const login = async (e: FormData) => {
     });
 
     const data = await res.json();
-    console.log("data after request", data);
 
     // If any error found (operational)
     if (data.isOperational || data.status === "fail")
