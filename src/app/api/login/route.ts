@@ -32,10 +32,12 @@ export const POST = catchAsync(async (req: Request) => {
     return NextResponse.json(new AppError(401, "Invalid username or password"));
 
   // Creating the token using jose
-  const token = await sign(
-    { userId: user._id },
-    process.env.JWT_SECRET as string
-  );
+  // const token = await sign(
+  //   { userId: user._id },
+  //   process.env.JWT_SECRET as string
+  // );
+  console.log(user);
+  const token = user._id;
 
   // Setting the cookie (for postman)
   cookies().set("token", token);

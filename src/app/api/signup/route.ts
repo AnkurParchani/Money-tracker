@@ -18,13 +18,14 @@ export const POST = catchAsync(async (req: Request) => {
     );
   // Creating the user
   const user = await User.create({ name, email, password, img });
-
+  console.log("logging the user", user);
   // Generating the token and setting the cookie
   // Creating the token using jose
-  const token = await sign(
-    { userId: user._id },
-    process.env.JWT_SECRET as string
-  );
+  // const token = await sign(
+  //   { userId: user._id },
+  //   process.env.JWT_SECRET as string
+  // );
+  const token = user._id;
 
   cookies().set("token", token);
 
