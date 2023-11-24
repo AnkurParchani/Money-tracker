@@ -35,6 +35,8 @@ export const getUser = async (
       user = await User.findById(userId);
     }
     /////////////////////////////////////////////////
+
+    return user;
   } catch (err) {
     console.log(err);
     return undefined;
