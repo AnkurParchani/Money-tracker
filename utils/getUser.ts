@@ -13,7 +13,7 @@ export const getUser = async (
     const token = cookies().get("token")?.value;
     if (!token) return undefined;
 
-    // await connectDB();
+    await connectDB();
     ///////////////////////////////////////////
 
     const decode: JWTPayload = await verify(
