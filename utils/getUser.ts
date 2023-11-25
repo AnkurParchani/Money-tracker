@@ -2,9 +2,6 @@ import { cookies } from "next/headers";
 import { JWTPayload } from "jose";
 import { verify } from "./jwt_sign_verify";
 
-import User from "../models/userModel";
-import connectDB from "../lib/dbConnect";
-
 // Getting the user according to the token for backend requests
 export const getUser = async (
   withPassword?: string
@@ -12,8 +9,6 @@ export const getUser = async (
   try {
     const token = cookies().get("token")?.value;
     if (!token) return undefined;
-
-    connectDB();
 
     const decode: JWTPayload = await verify(
       token as string,
@@ -27,14 +22,16 @@ export const getUser = async (
 
     if (!userId) return undefined;
 
-    let user;
-    if (withPassword === "withPassword") {
-      user = await User.findById(userId).select("+password");
-    } else {
-      user = await User.findById(userId);
-    }
+    const res = await fetch(`${process.env.SERVER_URL}/api/${userId}`, {
+      next: { tags: ["user"] },
+    });
+    if (!res.ok) return undefined;
 
-    return user;
+    const data = await res.json();
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail") return undefined;
+
+    return data.user;
   } catch (err) {
     console.log(err);
     return undefined;
