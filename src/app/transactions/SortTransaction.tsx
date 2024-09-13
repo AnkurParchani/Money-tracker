@@ -111,7 +111,7 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
             </div>
 
             <div className="flex justify-end text-gray-700 font-semibold mx-1 my-2 text-sm">
-              Total Spent: {transaction.totalSpentAmount.toFixed(2)}
+              Total Spent: ₹{transaction.totalSpentAmount}
             </div>
           </div>
         );
