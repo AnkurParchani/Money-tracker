@@ -21,7 +21,7 @@ const Select = ({
     <div
       className={`flex gap-1.5 outline-none px-2 py-1 ${
         noBorder ? "" : "border-2"
-      } rounded-sm text-blue-400 focus:outline-gray-400`}
+      } rounded-sm text-green-400 focus:outline-gray-400`}
     >
       <label htmlFor={name}>{label}</label>
       <select

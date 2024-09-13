@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import AppError from "./AppError";
 
 export default function handleServerSideError(err: unknown) {
-  console.log("Error from server side", err);
-
   if (err !== null && err !== undefined) {
     // If duplicate email error is there
     if (typeof err === "object" && "code" in err && err.code === 11000) {

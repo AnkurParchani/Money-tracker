@@ -59,8 +59,8 @@ const UserActionButtons = ({ user }: { user: Partial<User> }) => {
         />
 
         <UserActionBtn
-          borderColor="border-blue-400"
-          btnColor="text-blue-600"
+          borderColor="border-green-400"
+          btnColor="text-green-600"
           btnText="Sign-out"
           modalType="signout"
           onClick={handleSignoutClick}

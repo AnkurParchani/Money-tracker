@@ -26,7 +26,6 @@ const getTransactions = async () => {
 
     return data.transactions;
   } catch (err) {
-    console.log(err);
     return undefined;
   }
 };

@@ -15,7 +15,6 @@ export const uploadUserImg = async (e: FormData) => {
       .upload(imgName, img as FormDataEntryValue);
 
     if (error) {
-      console.log(error);
       throw new Error("Something went wrong while uploading the image");
     }
 
@@ -39,7 +38,6 @@ export const uploadTransactionImg = async (e: FormData) => {
       .upload(imgName, img as FormDataEntryValue);
 
     if (error) {
-      console.log(error);
       throw new Error("Something went wrong while uploading the image");
     }
 

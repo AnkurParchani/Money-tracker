@@ -17,7 +17,7 @@ const page = () => {
         New to app?{" "}
         <Link
           href="/signup"
-          className="font-semibold text-blue-700 hover:underline"
+          className="font-semibold text-green-700 hover:underline"
         >
           Join now
         </Link>

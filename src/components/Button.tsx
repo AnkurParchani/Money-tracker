@@ -28,7 +28,7 @@ const Button = (props: ButtonType) => {
   let btnClass;
   if (authButton) {
     btnClass =
-      "py-3 hover:bg-blue-900 duration-200 rounded-full bg-[#0a66c2] mt-2 text-white font-semibold tracking-wide focus:outline-gray-500";
+      "py-3 hover:bg-green-900 duration-200 rounded-full bg-[#0ac24a] mt-2 text-white font-semibold tracking-wide focus:outline-gray-500";
   } else if (modalActionBtn) {
     btnClass = `px-4 text-sm py-0.5 border-2 ${submitBtnBgColor} rounded-md text-white`;
   } else if (modalCancelBtn) {

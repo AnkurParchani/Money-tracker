@@ -17,7 +17,7 @@ const Greeting = ({ name }: { name: string }) => {
   return (
     <div className="text-base px-2 text-gray-800 font-medium">
       {greet},{" "}
-      <span className="font-medium text-blue-600 capitalize">{firstName}</span>
+      <span className="font-medium text-gray-600 capitalize">{firstName}</span>
     </div>
   );
 };

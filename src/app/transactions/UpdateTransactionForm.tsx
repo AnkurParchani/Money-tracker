@@ -38,7 +38,7 @@ const UpdateTransactionForm = ({
 
   return (
     <ModalContainer action={handleSubmit} setModalType={setModalType}>
-      <ModalHeading underlineColor="border-blue-400">
+      <ModalHeading underlineColor="border-green-400">
         Update Transaction:-
       </ModalHeading>
 
@@ -104,14 +104,14 @@ const UpdateTransactionForm = ({
 
       <div className="flex gap-2 justify-end mt-3">
         <Button
-          cancelBtnBorderColor="border-blue-500"
+          cancelBtnBorderColor="border-green-500"
           modalCancelBtn
           onClick={() => setModalType("")}
         >
           Cancel
         </Button>
         <Button
-          submitBtnBgColor="border-blue-500 bg-blue-500"
+          submitBtnBgColor="border-green-500 bg-green-500"
           submit
           modalActionBtn
         >

@@ -17,7 +17,7 @@ const TransactionCardButtons = ({
       {modalType.length < 1 && (
         <>
           <button
-            className="bg-blue-800 py-1 px-3 rounded-md"
+            className="bg-green-800 py-1 px-3 rounded-md"
             onClick={() => setModalType("update-transaction")}
           >
             Update Transaction

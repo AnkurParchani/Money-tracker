@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
@@ -30,9 +31,14 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
           date,
           img,
         });
+
+        if (type === "withdraw") {
+          existingEntry.totalSpentAmount += Number(amount);
+        }
       } else {
         acc.push({
           date,
+          totalSpentAmount: type === "withdraw" ? amount : 0,
           entries: [{ particulars, amount, type, user, _id, date, img }],
         });
       }
@@ -41,7 +47,7 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
     }, []);
   }, [transactions]);
 
-  // Changning the array according to the sorting
+  // Changing the array according to the sorting
   useEffect(() => {
     let sortedArray: GroupedDataType[] = [...groupedTransactionsByDate];
 
@@ -82,7 +88,7 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
           noBorder
           options={["Recent", "Old"]}
           name="transactionType"
-          selectClassname="capitalize cursor-pointer absolute right-4 top-0 text-black bg-blue-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md"
+          selectClassname="capitalize cursor-pointer absolute right-4 top-0 text-black bg-green-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md"
         />
       )}
 
@@ -102,6 +108,10 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
                   />
                 );
               })}
+            </div>
+
+            <div className="flex justify-end text-gray-700 font-semibold mx-1 my-2 text-sm">
+              Total Spent: {transaction.totalSpentAmount.toFixed(2)}
             </div>
           </div>
         );

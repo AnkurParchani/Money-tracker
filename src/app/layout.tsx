@@ -24,8 +24,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-blue-100`}>
-        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-blue-400 to-blue-300 opacity-70 -z-50 filter blur-3xl" />
+      <body className={`${inter.className} bg-green-200`}>
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-green-400 to-green-300 opacity-70 -z-50 filter blur-3xl" />
         <Nav />
         {children}
         <Toaster />

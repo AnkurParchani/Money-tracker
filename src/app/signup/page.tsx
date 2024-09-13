@@ -18,7 +18,7 @@ const page = () => {
         Already registered?{" "}
         <Link
           href="/login"
-          className="font-semibold text-blue-700 hover:underline"
+          className="font-semibold text-green-700 hover:underline"
         >
           Login
         </Link>
