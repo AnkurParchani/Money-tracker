@@ -7,7 +7,7 @@ type UserActionBtnType = {
   setModalType?: Dispatch<SetStateAction<string>>;
   modalType?: string;
   icon: React.ReactNode;
-  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 };
 
 const UserActionBtn = ({
@@ -25,7 +25,14 @@ const UserActionBtn = ({
       onClick={onClick}
     >
       {icon}
-      <button className={btnColor} onClick={() => setModalType(modalType)}>
+      <button
+        className={btnColor}
+        onClick={() => {
+          if (setModalType && modalType) {
+            setModalType(modalType);
+          }
+        }}
+      >
         {btnText}
       </button>
     </div>
