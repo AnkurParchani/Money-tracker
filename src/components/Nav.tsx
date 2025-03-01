@@ -1,17 +1,35 @@
+"use client"; // Ensure this is a client component
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
 import getUser from "../../utils/getUser";
 import Image from "next/image";
+import { useAppColor } from "@/contexts/AppColorContext";
 
-const Nav = async () => {
-  const user = await getUser();
+const Nav = () => {
+  const { appColor } = useAppColor();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Fetch user data when the component mounts
+    const fetchUser = async () => {
+      const userData = await getUser();
+      setUser(userData);
+    };
+    fetchUser();
+  }, []);
 
   return (
-    <nav className="text-center py-1 text-lg text-gray-400 font-semibold border-b sticky inset-x-0 bg-green-300 top-0 z-20">
+    <nav
+      style={{
+        borderBottom: "1px solid gray",
+      }}
+      className={`text-center py-1 text-lg text-gray-400 font-semibold sticky inset-x-0 top-0 z-50 bg-${appColor}-300`}
+    >
       <Link href="/">
         <span className="text-white">M</span>
-        <span className="text-green-500">T</span>
+        <span style={{ color: appColor }}>T</span>
       </Link>
 
       {user && (
@@ -25,7 +43,7 @@ const Nav = async () => {
               className="rounded-full h-7 w-auto"
             />
           ) : (
-            <AccountCircleIcon style={{ fontSize: "30px", color: "#1fde39" }} />
+            <AccountCircleIcon style={{ fontSize: "30px", color: appColor }} />
           )}
         </Link>
       )}

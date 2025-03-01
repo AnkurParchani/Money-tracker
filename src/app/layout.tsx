@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Nav from "../components/Nav";
+import { AppColorProvider } from "@/contexts/AppColorContext";
+import MainBody from "@/components/MainBody";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-green-200`}>
-        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-green-400 to-green-300 opacity-70 -z-50 filter blur-3xl" />
-        <Nav />
-        {children}
-        <Toaster />
-      </body>
+    <html lang="en" className={`${inter.className}`}>
+      <AppColorProvider>
+        <MainBody>
+          <Nav />
+          {children}
+          <Toaster />
+        </MainBody>
+      </AppColorProvider>
     </html>
   );
 }

@@ -8,16 +8,18 @@ import DeleteAccountForm from "./DeleteAccountForm";
 import UpdateProfileForm from "./UpdateProfileForm";
 import UpdatePasswordForm from "./UpdatePasswordForm";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-
+import ContrastIcon from '@mui/icons-material/Contrast';
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import UserActionBtn from "@/components/UserActionBtn";
 import { signout } from "../actions/authActions";
+import { useAppColor } from "@/contexts/AppColorContext";
 
 const UserActionButtons = ({ user }: { user: Partial<User> }) => {
   const [modalType, setModalType] = useState<string>("");
   const router = useRouter();
+  const { appColor } = useAppColor();
 
   // Function to signout
   function handleSignoutClick() {
@@ -34,6 +36,17 @@ const UserActionButtons = ({ user }: { user: Partial<User> }) => {
     <div>
       {/* Buttons for all the actions */}
       <div className="grid grid-cols-1 gap-2 items-center text-sm">
+        <UserActionBtn
+            borderColor="border-gray-400"
+            btnColor="text-gray-600"
+            btnText="Theme Selector"
+            onClick={() => router.push("/theme-selector")}
+            icon={
+              <ContrastIcon style={{ color: "gray", fontSize: "25px" }} />
+            }
+         />
+
+
         <UserActionBtn
           borderColor="border-green-400"
           btnColor="text-green-600"
@@ -59,13 +72,13 @@ const UserActionButtons = ({ user }: { user: Partial<User> }) => {
         />
 
         <UserActionBtn
-          borderColor="border-green-400"
-          btnColor="text-green-600"
+          borderColor={`border-${appColor}-400`}
+          btnColor={`text-${appColor}-600`}
           btnText="Sign-out"
           modalType="signout"
           onClick={handleSignoutClick}
           setModalType={setModalType}
-          icon={<LogoutIcon style={{ color: "#2563eb", fontSize: "25px" }} />}
+          icon={<LogoutIcon style={{ color: appColor, fontSize: "25px" }} />}
         />
 
         <UserActionBtn

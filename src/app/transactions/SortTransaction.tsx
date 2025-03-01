@@ -4,10 +4,12 @@
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import TransactionCard from "./TransactionCard";
 import Select from "@/components/Select";
+import { useAppColor } from "@/contexts/AppColorContext";
 
 type GroupedDataType = { date: string | undefined; entries: Transaction[] };
 
 const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
+  const { appColor } = useAppColor(); // Get theme color
   const [sortBy, setSortBy] = useState<string>("recent");
   const [sortedArr, setSortedArr] = useState<GroupedDataType[]>([]);
 
@@ -88,7 +90,7 @@ const SortTransaction = ({ transactions }: { transactions: Transaction[] }) => {
           noBorder
           options={["Recent", "Old"]}
           name="transactionType"
-          selectClassname="capitalize cursor-pointer absolute right-4 top-0 text-black bg-green-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md"
+          selectClassname={`capitalize cursor-pointer absolute right-4 top-0 text-black bg-${appColor}-100 focus:outline-none text-sm outline-none px-1.5 py-1 rounded-md`}
         />
       )}
 

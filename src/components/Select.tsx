@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from "react";
+import { useAppColor } from "@/contexts/AppColorContext";
 
 const Select = ({
   options,
@@ -17,11 +18,13 @@ const Select = ({
   defaultValue?: string;
   noBorder?: boolean;
 }) => {
+  const { appColor } = useAppColor(); // Get dynamic theme color
+
   return (
     <div
       className={`flex gap-1.5 outline-none px-2 py-1 ${
         noBorder ? "" : "border-2"
-      } rounded-sm text-green-400 focus:outline-gray-400`}
+      } rounded-sm text-${appColor}-400 focus:outline-gray-400`}
     >
       <label htmlFor={name}>{label}</label>
       <select

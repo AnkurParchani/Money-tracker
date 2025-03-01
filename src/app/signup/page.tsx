@@ -1,11 +1,16 @@
+"use client";
+
 import AuthContainer, {
   AuthHeading,
   AuthSubHeading,
 } from "@/components/AuthTemplate";
 import Form from "./Form";
 import Link from "next/link";
+import { useAppColor } from "@/contexts/AppColorContext";
 
-const page = () => {
+const Page = () => {
+  const { appColor } = useAppColor(); // Get theme color
+
   return (
     <>
       <AuthContainer>
@@ -14,11 +19,12 @@ const page = () => {
         <Form />
       </AuthContainer>
 
-      <p className="text-center mt-3 mb-5 text-sm  text-gray-800">
+      <p className="text-center mt-3 mb-5 text-sm text-gray-800">
         Already registered?{" "}
         <Link
           href="/login"
-          className="font-semibold text-green-700 hover:underline"
+          style={{ color: appColor }} // Apply dynamic theme color
+          className="font-semibold hover:underline"
         >
           Login
         </Link>
@@ -27,4 +33,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

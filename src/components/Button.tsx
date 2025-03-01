@@ -28,11 +28,11 @@ const Button = (props: ButtonType) => {
   let btnClass;
   if (authButton) {
     btnClass =
-      "py-3 hover:bg-green-900 duration-200 rounded-full bg-[#0ac24a] mt-2 text-white font-semibold tracking-wide focus:outline-gray-500";
+      "py-3 hover:bg-blue-800 duration-200 rounded-full bg-[#2563eb] mt-2 text-white font-semibold tracking-wide focus:outline-gray-500";
   } else if (modalActionBtn) {
-    btnClass = `px-4 text-sm py-0.5 border-2 ${submitBtnBgColor} rounded-md text-white`;
+    btnClass = `px-4 text-sm py-0.5 border-2 ${submitBtnBgColor || "bg-[#2563eb] border-blue-500"} rounded-md text-white`;
   } else if (modalCancelBtn) {
-    btnClass = `px-4 text-sm py-0.5 text-gray-800 border-2 ${cancelBtnBorderColor} rounded-md`;
+    btnClass = `px-4 text-sm py-0.5 text-gray-800 border-2 ${cancelBtnBorderColor || "border-blue-500"} rounded-md`;
   } else {
     btnClass = className;
   }

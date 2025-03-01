@@ -1,3 +1,4 @@
+'use server'
 import { cookies } from "next/headers";
 import { JWTPayload } from "jose";
 import { verify } from "./jwt_sign_verify";

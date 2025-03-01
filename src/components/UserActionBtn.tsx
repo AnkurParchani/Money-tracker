@@ -4,8 +4,8 @@ type UserActionBtnType = {
   borderColor: string;
   btnColor: string;
   btnText: string;
-  setModalType: Dispatch<SetStateAction<string>>;
-  modalType: string;
+  setModalType?: Dispatch<SetStateAction<string>>;
+  modalType?: string;
   icon: React.ReactNode;
   onClick?: MouseEventHandler<HTMLDivElement> | undefined;
 };

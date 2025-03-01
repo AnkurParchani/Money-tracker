@@ -11,6 +11,7 @@ import notifyBasedOnData from "../../../utils/notifyBasedOnData";
 
 import { addTransaction } from "../actions/transactionActions";
 import ModalContainer, { ModalHeading } from "@/components/ModalTemplate";
+import { useAppColor } from "@/contexts/AppColorContext";
 
 const AddTransactionForm = ({
   setModalType,
@@ -19,6 +20,7 @@ const AddTransactionForm = ({
   setModalType: Dispatch<SetStateAction<string>>;
   currentBalance: number;
 }) => {
+  const { appColor } = useAppColor(); // Get theme color
   const [transactionImg, setTransactionImg] = useState<string | undefined>(
     undefined
   );
@@ -36,7 +38,7 @@ const AddTransactionForm = ({
     <ModalContainer action={handleSubmit} setModalType={setModalType}>
       {/* Add an image */}
 
-      <ModalHeading underlineColor="border-green-400">
+      <ModalHeading underlineColor={`border-${appColor}-400`}>
         Add a Transaction
       </ModalHeading>
 
@@ -103,7 +105,7 @@ const AddTransactionForm = ({
 
       <div className="flex gap-2 justify-end mt-3">
         <Button
-          cancelBtnBorderColor="border-green-500"
+          cancelBtnBorderColor={`border-${appColor}-500`}
           modalCancelBtn
           onClick={() => setModalType("")}
         >
@@ -111,7 +113,7 @@ const AddTransactionForm = ({
         </Button>
         <Button
           submit
-          submitBtnBgColor="border-green-500 bg-green-500"
+          submitBtnBgColor={`border-${appColor}-500 bg-${appColor}-500`}
           modalActionBtn
         >
           Add

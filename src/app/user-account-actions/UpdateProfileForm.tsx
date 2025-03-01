@@ -1,5 +1,6 @@
 "use client";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useAppColor } from "@/contexts/AppColorContext";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -17,6 +18,7 @@ const UpdateProfileForm = ({
   user: Partial<User>;
 }) => {
   const [userImg, setUserImg] = useState<string | undefined>(user.img);
+  const { appColor } = useAppColor(); // Get theme color dynamically
 
   async function handleSubmit(event: FormData) {
     const data = await updateMe(event, userImg);
@@ -32,7 +34,7 @@ const UpdateProfileForm = ({
       {/* Add an image */}
       <AddUserImgFn userImg={userImg} setUserImg={setUserImg} />
 
-      <ModalHeading underlineColor="border-green-400">
+      <ModalHeading underlineColor={`border-${appColor}-400`}>
         Update Profile:-
       </ModalHeading>
 
@@ -56,14 +58,14 @@ const UpdateProfileForm = ({
 
       <div className="flex gap-2 justify-end mt-3">
         <Button
-          cancelBtnBorderColor="border-green-500"
+          cancelBtnBorderColor={`border-${appColor}-500`}
           modalCancelBtn
           onClick={() => setModalType("")}
         >
           Cancel
         </Button>
         <Button
-          submitBtnBgColor="border-green-500 bg-green-500"
+          submitBtnBgColor={`border-${appColor}-500 bg-${appColor}-500`}
           submit
           modalActionBtn
         >
